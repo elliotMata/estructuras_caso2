@@ -1,0 +1,84 @@
+{
+    "tiempoSimulacionHora" : 15000,
+
+    "procesos" : ["Permisos", "Excavacion", "Cimientos", "Framing", "Roofing", "PlomeriaCableado", "RevestimientoAislantes", "Acabados"],
+    "personal" : ["Abogados", "Constructores", "Maquinaria", "Techos", "Plomeria", "Cableado", "Decoradores"],
+    "materiales" : ["Cemento", "Madera", "Decoraciones"],
+
+    "procesosPorHora" : {
+        "minimo" : 1,
+        "maximo" : 3
+    },
+
+    "trabajadoresNecesarios" : {
+        "Abogados" : {
+            "minimo" : 2,
+            "maximo" : 4
+        },
+        "Otros" : {
+            "minimo" : 5,
+            "maximo" : 20
+        }
+    },
+
+    "trabajadoresPorLlamada" : {
+        "Abogados" : {
+            "minimo" : 1,
+            "maximo" : 2
+        },
+        "Constructores" : {
+            "minimo" : 5,
+            "maximo" : 25
+        },
+        "Maquinaria" : {
+            "minimo" : 5,
+            "maximo" : 15
+        },
+        "Techos" : {
+            "minimo" : 10,
+            "maximo" : 20
+        },
+        "Plomeria" : {
+            "minimo" : 2,
+            "maximo" : 5
+        },
+        "Cableado" : {
+            "minimo" : 5,
+            "maximo" : 10
+        },
+        "Decoradores" : {
+            "minimo" : 7,
+            "maximo" : 17
+        }
+    },
+
+    "cantidadesCompraMateriales" : {
+        "minimo" : 40,
+        "maximo" : 80
+    },
+
+    "cantidadesMaterialesProceso" : {
+        "minimo" : 45,
+        "maximo" : 75
+    },
+
+    "duracionProcesos" : {
+        "minimo" : 5,
+        "maximo" : 15
+    },
+
+    "duracionRevision" : {
+        "minimo" : 0.5,
+        "maximo" : 2
+    },
+
+    "duracionCompraMateriales" : {
+        "minimo" : 2,
+        "maximo" : 8
+    },
+
+    "duracionLlamadaPersonal" : {
+        "minimo" : 0.5,
+        "maximo" : 2
+    }
+}
