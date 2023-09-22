@@ -1,8 +1,8 @@
 #ifndef CASA_H
 #define CASA_H
 
-#include "EnumProcesos.h"
-#include "List.h"
+#include "Estructuras/EnumProcesos.h"
+#include "Estructuras/List.h"
 #include <string>
 
 class Casa
@@ -25,6 +25,6 @@ public:
                                     en caso de ser materiales indica al programa que se requiere el tipo de material especifico para que se habilite la "compra" de este material*/
     void siguienteProceso();      // avanza en la cola de procesos para cambiar al siguiente proceso
     void agregarProceso();        // añade procesos a la cola de procesos
-}
+};
 
 #endif
