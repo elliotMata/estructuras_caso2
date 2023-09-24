@@ -8,23 +8,22 @@
 class Casa
 {
 private:
-    Queue<Proceso> procesos;    // esta es la cola de procesos para llevar a cabo a lo largo de la construccion
-    Stack<void *> cemento;      // esta es una pila de cemento, simulando una bodega con sacos de cemento
-    Stack<void *> madera;       // esta es una pila de madera, simulando una bodega con reglas de madera
-    Stack<void *> decoraciones; // esta es una pila de decoraciones, simulando una bodega con cajas de lavamanos, inodoros, ventanas, etc
-    Queue<void *> trabajadores; // esta es la cola que simula el check-in y check-out de los trabajadores
+    Queue<Proceso> procesos;                       // esta es la cola de procesos para llevar a cabo a lo largo de la construccion
+    Stack<Material> cemento, madera, decoraciones; // pilas de los diferentes materiales
+    Queue<Persona> trabajadores;                   // esta es la cola que simula el check-in y check-out de los trabajadores
 public:
-    Node *sacarCemento();         // simula el sacar un saco de cemento de la bodega
-    void guardarCemento();        // simula el guardar un saco de cemento en la bodega
-    Node *sacarMadera();          // simuila el sacar una regla de madera de la bodega
-    void guardarMadera();         // simula el guardar una regla de madera en la bodega
-    Node *sacarDecoracion();      // simula el sacar una decoracion de la bodega
-    void guardarDecoracion();     // simula el guardar una decoracion en la bodega
-    void ejecutarProcesoActual(); /*despliega un mensaje indicando el proceso en el que se encuentra, verifica la disponibilidad de trabajadores y materiales para realizar el proceso
-                                    actual, de no cumplir con alguno de los dos espera a que los hilos respectivos suplan al programa de los recursos necesitados,
-                                    en caso de ser materiales indica al programa que se requiere el tipo de material especifico para que se habilite la "compra" de este material*/
-    void siguienteProceso();      // avanza en la cola de procesos para cambiar al siguiente proceso
-    void agregarProceso();        // añade procesos a la cola de procesos
+    Node *sacarCemento();                               // simula el sacar un saco de cemento de la bodega
+    void guardarCemento();                              // simula el guardar un saco de cemento en la bodega
+    Node *sacarMadera();                                // simuila el sacar una regla de madera de la bodega
+    void guardarMadera();                               // simula el guardar una regla de madera en la bodega
+    Node *sacarDecoracion();                            // simula el sacar una decoracion de la bodega
+    void guardarDecoracion();                           // simula el guardar una decoracion en la bodega
+    Proceso *getProcesoActual();                        // devuelve el proceso actual para acceder a su informacion
+    void siguienteProceso();                            // avanza la cola de procesos
+    void agregarProceso(Proceso *pProceso);             // añade un proceso a la cola
+    void llegadaTrabajadores(Persona[] * trabajadores); // grupo de trabajadores que llegan, se agregan a la cola de trabajadores
+    void checkIn();                                     // simula el check in de cada trabajador en la cola y lo añade a la cantidad disponible para el proceso actual
+    void checkOut();                                    // simula el check out de cada trabajador en la cola (todos los del proceso se añaden a la cola cuando se termine para simular que terminaron y se van a ir)
 };
 
 #endif
