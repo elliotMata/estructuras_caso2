@@ -1,12 +1,9 @@
 #ifndef CONSTRUCTORA_h
 #define CONSTRUCTORA_H
 
-#include "json.hpp"
 #include "Casa.h"
-#include "Materiales\CompradorMaterial.h"
+#include "Materiales\Comprador.h"
 #include "Personas\Jefe.h"
-
-using json = nlohmann::json;
 
 class Constructora
 {
