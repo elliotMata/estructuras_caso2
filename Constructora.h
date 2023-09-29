@@ -15,9 +15,9 @@ private:
 public:
     Constructora(); // se saca la info del json para darle valores a los atributos de los objetos
 
-    void iniciarConstruccion(); // aqui va a estar el hilo principal del programa, donde se realiza el ciclo de procesos de la casa y mostrar mensajes respectivos
-    void llamarTrabajadores();  // se habilida el hilo de llamado de trabajadores para pedir mas personal y mostrar mensajes respectivos
-    void comprarMaterial();     // se habilita el hilo de compra de materiales para abastecer bodegas y mostrar mensajes respectivos
+    void iniciarConstruccion();         // aqui va a estar el hilo principal del programa, donde se realiza el ciclo de procesos de la casa y mostrar mensajes respectivos
+    void llamarTrabajadores();          // se indica a jefe que debe llamar trabajadores y se agregan a la cola de checkin de la casa
+    void comprarMaterial(string pTipo); // se indica al comprador que debe comprar material y se almacena en la pila correspondiente de la casa
 }
 
 #endif
