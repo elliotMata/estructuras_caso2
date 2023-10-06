@@ -5,7 +5,7 @@
 
 #include <string>
 #include <iostream>
-#include "Estructuras/List.h"
+#include "List.h"
 #include "Personas/Persona.h"
 
 using namespace std;
