@@ -1,8 +1,7 @@
 #ifndef CASA_H
 #define CASA_H
 
-#include "Estructuras/EnumProcesos.h"
-#include "Estructuras/List.h"
+#include "List.h"
 #include <string>
 
 class Casa

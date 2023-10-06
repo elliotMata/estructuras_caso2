@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 #include "List.h"
-#include "Personas/Persona.h"
+#include "Persona.h"
 
 using namespace std;
 

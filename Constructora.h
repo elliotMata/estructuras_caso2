@@ -2,8 +2,8 @@
 #define CONSTRUCTORA_H
 
 #include "Casa.h"
-#include "Materiales\Comprador.h"
-#include "Personas\Jefe.h"
+#include "Comprador.h"
+#include "Jefe.h"
 
 class Constructora
 {
