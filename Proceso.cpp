@@ -48,7 +48,7 @@ bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
     return materialFaltante.isEmpty();
 }
 
-Proceso::Proceso(List configProceso)
+Proceso::Proceso(nlohmann::json configProceso)
 {
     this->nombreProceso = configProceso.find(0);
     int minPersonal, maxPersonal, minMaterial, maxMaterial;

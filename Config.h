@@ -8,14 +8,15 @@ using json = nlohmann::json;
 class Config
 {
 private:
-    string[] procesos;
-    string[] tipoPersonal;
-    int[] jefeConfig;
-    int[] personalNecesarioConfig;
-    int[] compradorConfig;
-    int[] procesoConfig;
+    json configProcesos;
+    json configDuraciones;
+    json configBusquedaRecursos;
 
 public:
+    nlohmann::json getConfigProcesos()
+    {
+        return configProcesos;
+    }
 }
 
 #endif

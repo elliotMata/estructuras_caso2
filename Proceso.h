@@ -7,8 +7,10 @@
 #include <iostream>
 #include "List.h"
 #include "Persona.h"
+#include "json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
 
 class Proceso
 {
@@ -18,7 +20,7 @@ private:
     List<Material> materialNecesario, materialFaltante;
 
 public:
-    Proceso(List configProceso) {}
+    Proceso(json configProceso) {}
 
     string getNombreProceso()
     {
@@ -35,8 +37,15 @@ public:
         return this->personalFaltante;
     }
 
-    List getMaterialNecesario() {}
-    List getMaterialFaltante() {}
+    List getMaterialNecesario()
+    {
+        return this->materialNecesario;
+    }
+
+    List getMaterialFaltante()
+    {
+        return this->materialFaltante;
+    }
 
     bool verificarPersonal(List pPersonal) {}
     bool verificarMaterial(int pCemento, int pMadera, int pDecor) {}
