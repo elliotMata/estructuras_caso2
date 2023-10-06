@@ -5,29 +5,41 @@
 
 #include <string>
 #include <iostream>
+#include "Estructuras/List.h"
+#include "Personas/Persona.h"
 
 using namespace std;
 
-class Proceso {
-    private:
-        string nombreProceso;
-        int cantidadPersonal;
+class Proceso
+{
+private:
+    string nombreProceso;
+    List<Persona> personalNecesario, personalFaltante;
+    List<Material> materialNecesario, materialFaltante;
 
-    public:
-        Proceso (string nombreProceso, int cantidadPersonal){
-            this->nombreProceso = nombreProceso;
-            this->cantidadPersonal = cantidadPersonal;
-        }
+public:
+    Proceso(List configProceso) {}
 
-        string getNombreProceso (){
-            return this->nombreProceso;
-        }
+    string getNombreProceso()
+    {
+        return this->nombreProceso;
+    }
 
-        int getCantidadPersonal (){
-            return this->cantidadPersonal;
-        }
+    List getPersonalNecesario()
+    {
+        return this->personalNecesario;
+    }
 
-        virtual void ejecutar () = 0;
+    List getPersonalFaltante()
+    {
+        return this->personalFaltante;
+    }
+
+    List getMaterialNecesario() {}
+    List getMaterialFaltante() {}
+
+    bool verificarPersonal(List pPersonal) {}
+    bool verificarMaterial(int pCemento, int pMadera, int pDecor) {}
 };
 
 #endif

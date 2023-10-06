@@ -14,14 +14,58 @@
     },
 
     "_comment3" : "cantidad de trabajadores necesarios para los procesos",
-    "trabajadoresNecesarios" : {
-        "Abogados" : {
-            "minimo" : 2,
-            "maximo" : 4
+    "ProcesosRequerimientos" : {
+        "Permisos" : {
+            "tipoTrabajadores" : "Abogados",
+            "minimoTrabajadores" : 2,
+            "maximoTrabajadores" : 4
         },
-        "Otros" : {
-            "minimo" : 5,
-            "maximo" : 20
+        "Excavacion" : {
+            "tipoTrabajadores": "Maquinaria",
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20
+        },
+        "Cimientos" : {
+            "tipoTrabajadores": "Constructores",
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20,
+            "tipoMateriales" : "Cemento",
+            "minimoMateriales" : 45,
+            "maximoMateriales" : 75
+        },
+        "Framing" : {
+            "tipoTrabajadores" : "Constructores",
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20,
+            "tipoMateriales" : "Madera",
+            "minimoMateriales" : 45,
+            "maximoMateriales" : 75
+        },
+        "Roofing" : {
+            "tipoTrabajadores" : "Techos",
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20,
+            "tipoMateriales" : "Madera",
+            "minimoMateriales" : 45,
+            "maximoMateriales" : 75
+        },
+        "PlomeriaCableado" : {
+            "tipoTrabajadores" : ["Plomeria","Cableado"],
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20
+        },
+        "RevestimientoAislantes" : {
+            "tipoTrabajadores" : "Constructores",
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20
+        },
+        "Acabados" : {
+            "tipoTrabajadores" : "Decoradores",
+            "minimoTrabajadores" : 5,
+            "maximoTrabajadores" : 20,
+            "tipoMateriales" : "Decoraciones",
+            "minimoMateriales" : 45,
+            "maximoMateriales" : 75
         }
     },
 
@@ -61,12 +105,6 @@
     "cantidadesCompraMateriales" : {
         "minimo" : 40,
         "maximo" : 80
-    },
-
-    "_comment6" : "cantidad de materiales necesarios para los procesos",
-    "cantidadesMaterialesProceso" : {
-        "minimo" : 45,
-        "maximo" : 75
     },
 
     "_comment7" : "duracion de los procesos de construccion",
