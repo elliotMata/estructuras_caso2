@@ -10,12 +10,36 @@ class Config
 private:
     json configProcesos;
     json configDuraciones;
-    json configBusquedaRecursos;
+    json configComprador;
+    json configJefe;
+    string[] procesos;
 
 public:
-    nlohmann::json getConfigProcesos()
+    Config() {}
+
+    json getConfigProcesos()
     {
-        return configProcesos;
+        return this->configProcesos;
+    }
+
+    json getConfigDuraciones()
+    {
+        return this->configDuraciones;
+    }
+
+    json getConfigComprador()
+    {
+        return this->configComprador;
+    }
+
+    json getConfigJefe()
+    {
+        return this->configJefe;
+    }
+
+    string[] getProcesos()
+    {
+        return this->procesos;
     }
 }
 

@@ -13,7 +13,7 @@
         "maximo" : 3
     },
 
-    "_comment3" : "cantidad de trabajadores necesarios para los procesos",
+    "_comment3" : "cantidad de trabajadores y materiales necesarios para los procesos",
     "ProcesosRequerimientos" : {
         "Permisos" : {
             "tipoTrabajadores" : "Abogados",
@@ -69,8 +69,19 @@
         }
     },
 
-    "_comment4" : "cantidad de trabajadores que pueden llegar por llamada",
-    "trabajadoresPorLlamada" : {
+    "_comment7" : "duracion de los procesos de construccion",
+    "duracionProcesos" : {
+        "minimo" : 5,
+        "maximo" : 15
+    },
+
+    "_comment8" : "duracion de la revision de los procesos",
+    "duracionRevision" : {
+        "minimo" : 0.5,
+        "maximo" : 2
+    },
+
+    "Jefe" : {
         "Abogados" : {
             "minimo" : 1,
             "maximo" : 2
@@ -98,36 +109,20 @@
         "Decoradores" : {
             "minimo" : 7,
             "maximo" : 17
+        },
+        "DuracionLlamadaPersonal" : {
+            "minimo" : 0.5,
+            "maximo" : 2
         }
     },
-
-    "_comment5" : "cantidad de materiales que se pueden comprar por tanda",
-    "cantidadesCompraMateriales" : {
-        "minimo" : 40,
-        "maximo" : 80
-    },
-
-    "_comment7" : "duracion de los procesos de construccion",
-    "duracionProcesos" : {
-        "minimo" : 5,
-        "maximo" : 15
-    },
-
-    "_comment8" : "duracion de la revision de los procesos",
-    "duracionRevision" : {
-        "minimo" : 0.5,
-        "maximo" : 2
-    },
-
-    "_comment9" : "duracion de la compra de materiales",
-    "duracionCompraMateriales" : {
-        "minimo" : 2,
-        "maximo" : 8
-    },
-
-    "_commentA" : "duracion de la llamada para que llegue el personal",
-    "duracionLlamadaPersonal" : {
-        "minimo" : 0.5,
-        "maximo" : 2
+    "Comprador" : {
+        "Cantidades" : {
+            "minimo" : 40,
+            "maximo" : 80
+        },
+        "Duracion" : {
+            "minimo" : 2,
+            "maximo" : 8
+        }
     }
 }
