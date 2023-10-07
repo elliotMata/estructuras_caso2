@@ -1,8 +1,11 @@
 #include "Proceso.h"
+#include "List.h"
+#include "Persona.h"
 
 using namespace std;
+using json = nlohmann::json;
 
-bool Proceso::verificarPersonal(List pPersonal)
+bool Proceso::verificarPersonal(List <Persona> pPersonal)
 {
     Persona *necesario, *disponible;
     for (int pos = 0; pos < personalNecesario.getSize(); pos++)
@@ -48,7 +51,7 @@ bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
     return materialFaltante.isEmpty();
 }
 
-Proceso::Proceso(nlohmann::json configProceso)
+Proceso::Proceso(json configProceso)
 {
     this->nombreProceso = configProceso.find(0);
     int minPersonal, maxPersonal, minMaterial, maxMaterial;

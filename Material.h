@@ -16,8 +16,8 @@ class Material {
 
     public:
         Material (string nombreMaterial, int cantidad){
-            this->nombreMaterial;
-            this->cantidad;
+            this->nombreMaterial = nombreMaterial;
+            this->cantidad = cantidad;
         }
 
         string getNombreMaterial (){

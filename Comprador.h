@@ -17,7 +17,7 @@ private:
     int minCompra, maxCompra, duracionMin, duracionMax;
 
 public:
-    Comprador(int[] pConfig);
+    Comprador(vector <int> pConfig);
 
     Material comprar(string pTipo); // hilo, parametro es el tipo de material que quiere comprar, retorna un paquete del material comprado
 };

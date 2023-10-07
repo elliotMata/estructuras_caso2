@@ -3,7 +3,12 @@
 
 #include "json.hpp"
 
+#include <string>
+#include <iostream>
+#include <vector>
+
 using json = nlohmann::json;
+using namespace std;
 
 class Config
 {
@@ -12,7 +17,7 @@ private:
     json configDuraciones;
     json configComprador;
     json configJefe;
-    string[] procesos;
+    vector <string> procesos;
 
 public:
     Config() {}
@@ -37,10 +42,10 @@ public:
         return this->configJefe;
     }
 
-    string[] getProcesos()
+    vector <string> getProcesos()
     {
         return this->procesos;
     }
-}
+};
 
 #endif

@@ -111,8 +111,8 @@
             "maximo" : 17
         },
         "DuracionLlamadaPersonal" : {
-            "minimo" : 0.5,
-            "maximo" : 2
+            "minimo" : 1,
+            "maximo" : 3
         }
     },
     "Comprador" : {

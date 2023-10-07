@@ -1,5 +1,9 @@
 #include "Config.h"
+
 #include <fstream>
+#include <vector>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -12,5 +16,5 @@ Config::Config()
     this->configComprador = config["Comprador"];
     this->configJefe = config["Jefe"];
     this->configProcesos = config["ProcesosRequerimientos"];
-    this->procesos = config["procesos"];
+    this->procesos.push_back(config["procesos"]);
 }

@@ -5,6 +5,8 @@
 
 #include <string>
 #include <iostream>
+
+#include "Material.h"
 #include "List.h"
 #include "Persona.h"
 #include "json.hpp"
@@ -16,8 +18,8 @@ class Proceso
 {
 private:
     string nombreProceso;
-    List<Persona> personalNecesario, personalFaltante;
-    List<Material> materialNecesario, materialFaltante;
+    List <Persona> personalNecesario, personalFaltante;
+    List <Material> materialNecesario, materialFaltante;
 
 public:
     Proceso(json configProceso) {}
@@ -27,27 +29,27 @@ public:
         return this->nombreProceso;
     }
 
-    List getPersonalNecesario()
+    List <Persona> getPersonalNecesario()
     {
         return this->personalNecesario;
     }
 
-    List getPersonalFaltante()
+    List <Persona> getPersonalFaltante()
     {
         return this->personalFaltante;
     }
 
-    List getMaterialNecesario()
+    List <Material> getMaterialNecesario()
     {
         return this->materialNecesario;
     }
 
-    List getMaterialFaltante()
+    List <Material> getMaterialFaltante()
     {
         return this->materialFaltante;
     }
 
-    bool verificarPersonal(List pPersonal) {}
+    bool verificarPersonal(List <Persona> pPersonal) {}
     bool verificarMaterial(int pCemento, int pMadera, int pDecor) {}
 };
 
