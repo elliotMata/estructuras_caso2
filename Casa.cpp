@@ -26,13 +26,32 @@ Proceso *Casa::getProcesoActual()
 
 void Casa::siguienteProceso()
 {
+    List<Material> *materiales = procesos->front()->getData()->getMaterialNecesario();
+    Material *materialActual;
+    for (int pos = 0; pos < materiales->getSize(); pos++)
+    {
+        materialActual = materiales->find(pos);
+        if (materialActual->getNombreMaterial() == "Cemento")
+        {
+            sacarCemento(materialActual->getCantidadMaterial());
+        }
+        else if (materialActual->getNombreMaterial() == "Madera")
+        {
+            sacarMadera(materialActual->getCantidadMaterial());
+        }
+        else
+        {
+            sacarDecoracion(materialActual->getCantidadMaterial());
+        }
+    }
     procesos->dequeue();
     checkOut();
 }
 
-bool Casa::hayMasProcesos ()
+bool Casa::hayMasProcesos()
 {
-    if (procesos->isEmpty()){
+    if (procesos->isEmpty())
+    {
         return false;
     }
     return true;
@@ -119,12 +138,12 @@ void Casa::checkOut()
     }
 }
 
-Queue<Persona>* Casa::getTrabajadores()
+Queue<Persona> *Casa::getTrabajadores()
 {
     return this->trabajadores;
 }
 
-List<Persona>* Casa::getTrabajadoresDisponibles()
+List<Persona> *Casa::getTrabajadoresDisponibles()
 {
     List<Persona> *result = new List<Persona>();
     Queue<Persona> *trabajadoresTemp = trabajadores;

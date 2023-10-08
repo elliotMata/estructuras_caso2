@@ -27,14 +27,17 @@ void Constructora::comprarMaterial()
         if (material == "Cemento")
         {
             casa->guardarCemento(paquete.getCantidadMaterial());
+            // cout << "comprando cemento" << endl;
         }
         else if (material == "Madera")
         {
             casa->guardarMadera(paquete.getCantidadMaterial());
+            // cout << "comprando madera" << endl;
         }
         else
         {
             casa->guardarDecoracion(paquete.getCantidadMaterial());
+            // cout << "comprando decoraciones" << endl;
         }
     }
 }
@@ -49,6 +52,9 @@ void Constructora::iniciarConstruccion()
         {
             cout << "Comprando materiales necesarios" << endl;
             comprarMaterial();
+            /* cout << "cemento" << casa->getCantidadCemento() << endl;
+            cout << "madera " << casa->getCantidadMadera() << endl;
+            cout << "decor " << casa->getCantidadDecoraciones() << endl; */
         }
         while (!procesoActual->verificarPersonal(casa->getTrabajadoresDisponibles()))
         {

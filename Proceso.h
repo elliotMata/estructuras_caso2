@@ -19,9 +19,9 @@ class Proceso
 {
 private:
     string nombreProceso;
-    List<Persona> personalNecesario;
+    List<Persona> *personalNecesario = new List<Persona>();
     vector<string> personalFaltante, materialFaltante;
-    List<Material> materialNecesario;
+    List<Material> *materialNecesario = new List<Material>();
 
 public:
     Proceso(json configProceso, string nombre);
@@ -31,7 +31,7 @@ public:
         return this->nombreProceso;
     }
 
-    List<Persona> getPersonalNecesario()
+    List<Persona>* getPersonalNecesario()
     {
         return this->personalNecesario;
     }
@@ -41,7 +41,7 @@ public:
         return this->personalFaltante;
     }
 
-    List<Material> getMaterialNecesario()
+    List<Material>* getMaterialNecesario()
     {
         return this->materialNecesario;
     }

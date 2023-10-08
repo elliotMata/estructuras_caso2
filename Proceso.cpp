@@ -6,27 +6,33 @@
 using namespace std;
 using json = nlohmann::json;
 
-bool Proceso::verificarPersonal(List<Persona>* pPersonal)
+bool Proceso::verificarPersonal(List<Persona> *pPersonal)
 {
     Persona *necesario, *disponible;
-    for (int pos = 0; pos < personalNecesario.getSize(); pos++)
+    personalFaltante.clear();
+    for (int pos = 0; pos < personalNecesario->getSize(); pos++)
     {
-        necesario = personalNecesario.find(pos);
-        disponible = pPersonal->find(pos);
-        if (necesario->getCantidadPersona() > disponible->getCantidadPersona())
+
+        necesario = personalNecesario->find(pos);
+        for (int j = 0; j < pPersonal->getSize(); j++)
         {
-            personalFaltante.push_back(necesario->getTipoPersona());
+            disponible = pPersonal->find(j);
+            if (necesario->getCantidadPersona() > disponible->getCantidadPersona())
+            {
+                personalFaltante.push_back(necesario->getTipoPersona());
+            }
         }
     }
-    return personalFaltante.size() == 0; // vacio o no
+    return personalFaltante.empty();
 }
 
 bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
 {
     Material *necesario;
-    for (int pos = 0; pos < materialNecesario.getSize(); pos++)
+    materialFaltante.clear();
+    for (int pos = 0; pos < materialNecesario->getSize(); pos++)
     {
-        necesario = materialNecesario.find(pos);
+        necesario = materialNecesario->find(pos);
         if (necesario->getNombreMaterial() == "Cemento")
         {
             if (necesario->getCantidadMaterial() > pCemento)
@@ -61,7 +67,7 @@ Proceso::Proceso(json configProceso, string nombre)
     for (const string &trabajador : personal)
     {
         int cantidadNecesaria = (rand() % (maxPersonal - minPersonal + 1)) + minPersonal;
-        this->personalNecesario.add(new Persona(trabajador, cantidadNecesaria));
+        this->personalNecesario->add(new Persona(trabajador, cantidadNecesaria));
     }
     if (configProceso.size() > 3)
     {
@@ -71,7 +77,7 @@ Proceso::Proceso(json configProceso, string nombre)
         for (const string &material : materiales)
         {
             int cantidadNecesaria = (rand() % (maxMaterial - minMaterial + 1)) + minMaterial;
-            this->materialNecesario.add(new Material(material, cantidadNecesaria));
+            this->materialNecesario->add(new Material(material, cantidadNecesaria));
         }
     }
 }
