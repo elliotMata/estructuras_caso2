@@ -14,7 +14,7 @@ void Constructora::llamarTrabajadores()
     for (const string &trabajador : trabajadores)
     {
         Persona cuadrilla = jefe->llamarTrabajadores(trabajador);
-        casa->checkIn(cuadrilla);
+        casa->checkIn(&cuadrilla);
     }
 }
 
@@ -26,15 +26,15 @@ void Constructora::comprarMaterial()
         Material paquete = comprador->comprar(material);
         if (material == "Cemento")
         {
-            casa->guardarCemento(paquete->getCantidadMaterial());
+            casa->guardarCemento(paquete.getCantidadMaterial());
         }
         else if (material == "Madera")
         {
-            casa->guardarMadera(paquete->getCantidadMaterial());
+            casa->guardarMadera(paquete.getCantidadMaterial());
         }
         else
         {
-            casa->guardarDecoracion(paquete->getCantidadMaterial());
+            casa->guardarDecoracion(paquete.getCantidadMaterial());
         }
     }
 }

@@ -18,14 +18,15 @@ private:
 public:
     Casa(json configProcesos, vector<string> procesos) {}
 
-    List<Persona> getTrabajadoresDisponibles();
-    void *sacarCemento(int cantidad);       // simula el sacar un saco de cemento de la bodega
+    Queue<Persona>* getTrabajadoresDisponibles();
+    Queue<Persona>* getTrabajadores();
+    void sacarCemento(int cantidad);        // simula el sacar un saco de cemento de la bodega
     void guardarCemento(int cantidad);      // simula el guardar un saco de cemento en la bodega
     int getCantidadCemento();               // hace inventario de cuantos sacos de cemento hay en la bodega
-    void *sacarMadera(int cantidad);        // simula el sacar una regla de madera de la bodega
+    void sacarMadera(int cantidad);         // simula el sacar una regla de madera de la bodega
     void guardarMadera(int cantidad);       // simula el guardar una regla de madera en la bodega
     int getCantidadMadera();                // hace inventario de cuantas reglas de madera hay en la bodega
-    void *sacarDecoracion(int cantidad);    // simula el sacar una decoracion de la bodega
+    void sacarDecoracion(int cantidad);     // simula el sacar una decoracion de la bodega
     void guardarDecoracion(int cantidad);   // simula el guardar una decoracion en la bodega
     int getCantidadDecoraciones();          // hace inventario de cuantas decoraciones hay en la bodega
     Proceso *getProcesoActual();            // devuelve el proceso actual para acceder a su informacion

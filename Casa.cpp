@@ -3,11 +3,11 @@
 
 Casa::Casa(json configProcesos, vector<string> procesos)
 {
-    procesos = new Queue<Proceso>();
-    cemento = new Stack<Material>();
-    madera = new Stack<Material>();
-    decoraciones = new Stack<Material>();
-    trabajadores = new Queue<Persona>();
+    this->procesos = new List<Proceso>();
+    this->cemento = new List<Material>();
+    this->madera = new List<Material>();
+    this->decoraciones = new List<Material>();
+    this->trabajadores = new List<Persona>();
     for (const string &proceso : procesos)
     {
         agregarProceso(new Proceso(configProcesos[proceso], proceso));
@@ -34,7 +34,7 @@ void Casa::sacarCemento(int cantidad)
 {
     while (cantidad-- > 0)
     {
-        cemento.pop();
+        cemento->pop();
     }
 }
 
@@ -42,7 +42,7 @@ void Casa::sacarDecoracion(int cantidad)
 {
     while (cantidad-- > 0)
     {
-        decoraciones.pop();
+        decoraciones->pop();
     }
 }
 
@@ -50,7 +50,7 @@ void Casa::sacarMadera(int cantidad)
 {
     while (cantidad-- > 0)
     {
-        madera.pop();
+        madera->pop();
     }
 }
 
@@ -111,25 +111,25 @@ void Casa::checkOut()
     }
 }
 
-Queue<Persona> *Casa::getTrabajadores()
+Queue<Persona>* Casa::getTrabajadores()
 {
     return this->trabajadores;
 }
 
-List<Persona> Casa::getTrabajadoresDisponibles()
+Queue<Persona>* Casa::getTrabajadoresDisponibles()
 {
-    List<Persona> result = List<Persona>();
-    Queue<Persona> trabajadoresTemp = *trabajadores;
+    List<Persona> *result = new List<Persona>();
+    Queue<Persona> *trabajadoresTemp = trabajadores;
     map<string, int> counts;
-    while (!trabajadoresTemp.isEmpty())
+    while (!trabajadoresTemp->isEmpty())
     {
-        string tipo = trabajadoresTemp.front()->getData();
+        string tipo = trabajadoresTemp->front()->getTipoPersona();
         counts[tipo]++;
-        trabajadoresTemp.dequeue();
+        trabajadoresTemp->dequeue();
     }
     for (const auto &pair : counts)
     {
-        result.add(pair.first, pair.second);
+        result->add(new Persona(pair.first, pair.second));
     }
     return result;
 }

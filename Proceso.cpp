@@ -18,7 +18,7 @@ bool Proceso::verificarPersonal(List<Persona> pPersonal)
             personalFaltante.push_back(necesario->getTipoPersona());
         }
     }
-    return personalFaltante.isEmpty();
+    return personalFaltante.size() == 0; // vacio o no
 }
 
 bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
