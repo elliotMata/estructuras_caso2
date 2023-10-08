@@ -12,6 +12,7 @@ private:
     Node<T> *first;
     Node<T> *last;
     Node<T> *searchPosition;
+    unordered_map<int, Node<T> *> nodeIndex;
     int size;
 
 public:
@@ -200,6 +201,11 @@ public:
             searchPosition = searchPosition->getNext();
         }
         return result;
+    }
+
+    T *front()
+    {
+        return first;
     }
 };
 

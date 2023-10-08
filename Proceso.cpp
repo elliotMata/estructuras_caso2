@@ -15,7 +15,7 @@ bool Proceso::verificarPersonal(List<Persona> pPersonal)
         disponible = pPersonal.find(pos);
         if (necesario->getCantidadPersona() > disponible->getCantidadPersona())
         {
-            personalFaltante.add(new Persona(necesario->getTipoPersona(), 0));
+            personalFaltante.push_back(necesario->getTipoPersona());
         }
     }
     return personalFaltante.isEmpty();
@@ -31,25 +31,25 @@ bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
         {
             if (necesario->getCantidadMaterial() > pCemento)
             {
-                materialFaltante.add(new Material("Cemento", 0));
+                materialFaltante.push_back("Cemento");
             }
         }
         if (necesario->getNombreMaterial() == "Madera")
         {
             if (necesario->getCantidadMaterial() > pMadera)
             {
-                materialFaltante.add(new Material("Madera", 0));
+                materialFaltante.push_back("Madera");
             }
         }
         if (necesario->getNombreMaterial() == "Decoraciones")
         {
             if (necesario->getCantidadMaterial() > pDecor)
             {
-                materialFaltante.add(new Material("Decoraciones", 0));
+                materialFaltante.push_back("Decoraciones");
             }
         }
     }
-    return materialFaltante.isEmpty();
+    return materialFaltante.empty();
 }
 
 Proceso::Proceso(json configProceso, string nombre)

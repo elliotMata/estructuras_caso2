@@ -10,6 +10,7 @@
 #include "List.h"
 #include "Persona.h"
 #include "json.hpp"
+#include <vector>
 
 using namespace std;
 using json = nlohmann::json;
@@ -18,8 +19,9 @@ class Proceso
 {
 private:
     string nombreProceso;
-    List<Persona> personalNecesario, personalFaltante;
-    List<Material> materialNecesario, materialFaltante;
+    List<Persona> personalNecesario;
+    vector<string> personalFaltante, materialFaltante;
+    List<Material> materialNecesario;
 
 public:
     Proceso(json configProceso, string nombre) {}
@@ -34,7 +36,7 @@ public:
         return this->personalNecesario;
     }
 
-    List<Persona> getPersonalFaltante()
+    vector<string> getPersonalFaltante()
     {
         return this->personalFaltante;
     }
@@ -44,7 +46,7 @@ public:
         return this->materialNecesario;
     }
 
-    List<Material> getMaterialFaltante()
+    vector<string> getMaterialFaltante()
     {
         return this->materialFaltante;
     }

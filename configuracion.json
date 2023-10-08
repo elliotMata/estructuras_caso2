@@ -29,7 +29,7 @@
             "tipoTrabajadores": ["Constructores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
-            "tipoMateriales" : "Cemento",
+            "tipoMateriales" : ["Cemento"],
             "minimoMateriales" : 45,
             "maximoMateriales" : 75
         },
@@ -37,7 +37,7 @@
             "tipoTrabajadores" : ["Constructores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
-            "tipoMateriales" : "Madera",
+            "tipoMateriales" : ["Madera"],
             "minimoMateriales" : 45,
             "maximoMateriales" : 75
         },
@@ -45,7 +45,7 @@
             "tipoTrabajadores" : ["Techos"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
-            "tipoMateriales" : "Madera",
+            "tipoMateriales" : ["Madera"],
             "minimoMateriales" : 45,
             "maximoMateriales" : 75
         },
@@ -63,24 +63,11 @@
             "tipoTrabajadores" : ["Decoradores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
-            "tipoMateriales" : "Decoraciones",
+            "tipoMateriales" : ["Decoraciones"],
             "minimoMateriales" : 45,
             "maximoMateriales" : 75
         }
     },
-
-    "_comment7" : "duracion de los procesos de construccion",
-    "duracionProcesos" : {
-        "minimo" : 5,
-        "maximo" : 15
-    },
-
-    "_comment8" : "duracion de la revision de los procesos",
-    "duracionRevision" : {
-        "minimo" : 0.5,
-        "maximo" : 2
-    },
-
     "Jefe" : {
         "Abogados" : {
             "minimo" : 1,
