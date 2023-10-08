@@ -16,17 +16,17 @@
     "_comment3" : "cantidad de trabajadores y materiales necesarios para los procesos",
     "ProcesosRequerimientos" : {
         "Permisos" : {
-            "tipoTrabajadores" : "Abogados",
+            "tipoTrabajadores" : ["Abogados"],
             "minimoTrabajadores" : 2,
             "maximoTrabajadores" : 4
         },
         "Excavacion" : {
-            "tipoTrabajadores": "Maquinaria",
+            "tipoTrabajadores": ["Maquinaria"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20
         },
         "Cimientos" : {
-            "tipoTrabajadores": "Constructores",
+            "tipoTrabajadores": ["Constructores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
             "tipoMateriales" : "Cemento",
@@ -34,7 +34,7 @@
             "maximoMateriales" : 75
         },
         "Framing" : {
-            "tipoTrabajadores" : "Constructores",
+            "tipoTrabajadores" : ["Constructores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
             "tipoMateriales" : "Madera",
@@ -42,7 +42,7 @@
             "maximoMateriales" : 75
         },
         "Roofing" : {
-            "tipoTrabajadores" : "Techos",
+            "tipoTrabajadores" : ["Techos"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
             "tipoMateriales" : "Madera",
@@ -55,12 +55,12 @@
             "maximoTrabajadores" : 20
         },
         "RevestimientoAislantes" : {
-            "tipoTrabajadores" : "Constructores",
+            "tipoTrabajadores" : ["Constructores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20
         },
         "Acabados" : {
-            "tipoTrabajadores" : "Decoradores",
+            "tipoTrabajadores" : ["Decoradores"],
             "minimoTrabajadores" : 5,
             "maximoTrabajadores" : 20,
             "tipoMateriales" : "Decoraciones",
@@ -123,6 +123,17 @@
         "Duracion" : {
             "minimo" : 2,
             "maximo" : 8
+        }
+    },
+
+    "Duraciones" : {
+        "Procesos" : {
+            "minimo" : 5,
+            "maximo" : 15
+        },
+        "Revision" : {
+            "minimo" : 0.5,
+            "maximo" : 2
         }
     }
 }

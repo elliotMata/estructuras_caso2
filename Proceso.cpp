@@ -1,11 +1,12 @@
 #include "Proceso.h"
 #include "List.h"
 #include "Persona.h"
+#include <vector>
 
 using namespace std;
 using json = nlohmann::json;
 
-bool Proceso::verificarPersonal(List <Persona> pPersonal)
+bool Proceso::verificarPersonal(List<Persona> pPersonal)
 {
     Persona *necesario, *disponible;
     for (int pos = 0; pos < personalNecesario.getSize(); pos++)
@@ -51,27 +52,26 @@ bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
     return materialFaltante.isEmpty();
 }
 
-Proceso::Proceso(json configProceso)
+Proceso::Proceso(json configProceso, string nombre)
 {
-    this->nombreProceso = configProceso.find(0);
-    int minPersonal, maxPersonal, minMaterial, maxMaterial;
-    minPersonal = configProceso.find(2);
-    maxPersonal = configProceso.find(3);
-    List<string> personal = configProceso.find(1);
-    for (int i = 0; i < personal.getSize(); i++)
+    this->nombreProceso = nombre;
+    int minPersonal = configProceso["minimoTrabajadores"];
+    int maxPersonal = configProceso["maximoTrabajadores"];
+    vector<string> personal = configProceso["tipoTrabajadores"];
+    for (const string &trabajador : personal)
     {
         int cantidadNecesaria = (rand() % (maxPersonal - minPersonal + 1)) + minPersonal;
-        this->personalNecesario.add(new Persona(personal.find(i), cantidadNecesaria));
+        this->personalNecesario.add(new Persona(trabajador, cantidadNecesaria));
     }
-    if (configProceso.getSize() > 4)
+    if (configProceso.size() > 3)
     {
-        minMaterial = configProceso.find(5);
-        maxMaterial = configProceso.find(6);
-        List<string> materiales = configProceso.find(4);
-        for (int i = 0; i < materiales.getSize(); i++)
+        int minMaterial = configProceso["minimoMateriales"];
+        int maxMaterial = configProceso["maximoMateriales"];
+        vector<string> materiales = configProceso["tipoMateriales"];
+        for (const string &material : materiales)
         {
             int cantidadNecesaria = (rand() % (maxMaterial - minMaterial + 1)) + minMaterial;
-            this->materialNecesario.add(new Material(materiales.find(1), cantidadNecesaria));
+            this->materialNecesario.add(new Material(material, cantidadNecesaria));
         }
     }
 }

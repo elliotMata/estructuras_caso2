@@ -8,15 +8,15 @@
 class Casa
 {
 private:
-    Queue <Proceso> *procesos;                       // esta es la cola de procesos para llevar a cabo a lo largo de la construccion
-    Stack <Material> *cemento, *madera, *decoraciones; // pilas de los diferentes materiales
-    Queue <Persona> *trabajadores;                   // esta es la cola que simula el check-in y check-out de los trabajadores
+    Queue<Proceso> *procesos;                         // esta es la cola de procesos para llevar a cabo a lo largo de la construccion
+    Stack<Material> *cemento, *madera, *decoraciones; // pilas de los diferentes materiales
+    Queue<Persona> *trabajadores;                     // esta es la cola que simula el check-in y check-out de los trabajadores
 public:
-    Node <Material> *sacarCemento();                            // simula el sacar un saco de cemento de la bodega
+    Node<Material> *sacarCemento();                  // simula el sacar un saco de cemento de la bodega
     void guardarCemento();                           // simula el guardar un saco de cemento en la bodega
-    Node <Material> *sacarMadera();                             // simuila el sacar una regla de madera de la bodega
+    Node<Material> *sacarMadera();                   // simuila el sacar una regla de madera de la bodega
     void guardarMadera();                            // simula el guardar una regla de madera en la bodega
-    Node <Material> *sacarDecoracion();                         // simula el sacar una decoracion de la bodega
+    Node<Material> *sacarDecoracion();               // simula el sacar una decoracion de la bodega
     void guardarDecoracion();                        // simula el guardar una decoracion en la bodega
     Proceso *getProcesoActual();                     // devuelve el proceso actual para acceder a su informacion
     void siguienteProceso();                         // avanza la cola de procesos

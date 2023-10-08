@@ -19,16 +19,18 @@ private:
     int minCompra, maxCompra, duracionMin, duracionMax;
 
 public:
-    Comprador(json pConfig){
+    Comprador(json pConfig)
+    {
         minCompra = pConfig["Cantidades"]["minimo"];
         maxCompra = pConfig["Cantidades"]["maximo"];
         duracionMin = pConfig["Duracion"]["minimo"];
         duracionMax = pConfig["Duracion"]["maximo"];
     }
 
-    Material* comprar(string pTipo){
+    Material *comprar(string pTipo)
+    {
         int compra = (rand() % (maxCompra - minCompra + 1)) + minCompra;
-        Material *materialComprado = new Material (pTipo, compra);
+        Material *materialComprado = new Material(pTipo, compra);
         return materialComprado;
     } // hilo, parametro es el tipo de material que quiere comprar, retorna un paquete del material comprado
 };

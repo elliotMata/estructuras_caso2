@@ -17,7 +17,7 @@ private:
     json configDuraciones;
     json configComprador;
     json configJefe;
-    vector <string> procesos;
+    vector<string> procesos;
 
 public:
     Config() {}
@@ -42,7 +42,7 @@ public:
         return this->configJefe;
     }
 
-    vector <string> getProcesos()
+    vector<string> getProcesos()
     {
         return this->procesos;
     }

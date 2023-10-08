@@ -18,38 +18,38 @@ class Proceso
 {
 private:
     string nombreProceso;
-    List <Persona> personalNecesario, personalFaltante;
-    List <Material> materialNecesario, materialFaltante;
+    List<Persona> personalNecesario, personalFaltante;
+    List<Material> materialNecesario, materialFaltante;
 
 public:
-    Proceso(json configProceso) {}
+    Proceso(json configProceso, string nombre) {}
 
     string getNombreProceso()
     {
         return this->nombreProceso;
     }
 
-    List <Persona> getPersonalNecesario()
+    List<Persona> getPersonalNecesario()
     {
         return this->personalNecesario;
     }
 
-    List <Persona> getPersonalFaltante()
+    List<Persona> getPersonalFaltante()
     {
         return this->personalFaltante;
     }
 
-    List <Material> getMaterialNecesario()
+    List<Material> getMaterialNecesario()
     {
         return this->materialNecesario;
     }
 
-    List <Material> getMaterialFaltante()
+    List<Material> getMaterialFaltante()
     {
         return this->materialFaltante;
     }
 
-    bool verificarPersonal(List <Persona> pPersonal) {}
+    bool verificarPersonal(List<Persona> pPersonal) {}
     bool verificarMaterial(int pCemento, int pMadera, int pDecor) {}
 };
 
