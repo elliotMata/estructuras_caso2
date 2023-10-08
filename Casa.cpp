@@ -1,4 +1,5 @@
 #include "Casa.h"
+#include <map>
 
 Casa::Casa(json configProcesos, vector<string> procesos)
 {
@@ -26,6 +27,7 @@ Proceso *Casa::getProcesoActual()
 void Casa::siguienteProceso()
 {
     procesos->dequeue();
+    checkOut();
 }
 
 void Casa::sacarCemento(int cantidad)
@@ -107,4 +109,27 @@ void Casa::checkOut()
     {
         trabajadores->dequeue();
     }
+}
+
+Queue<Persona> *Casa::getTrabajadores()
+{
+    return this->trabajadores;
+}
+
+List<Persona> Casa::getTrabajadoresDisponibles()
+{
+    List<Persona> result = List<Persona>();
+    Queue<Persona> trabajadoresTemp = *trabajadores;
+    map<string, int> counts;
+    while (!trabajadoresTemp.isEmpty())
+    {
+        string tipo = trabajadoresTemp.front()->getData();
+        counts[tipo]++;
+        trabajadoresTemp.dequeue();
+    }
+    for (const auto &pair : counts)
+    {
+        result.add(pair.first, pair.second);
+    }
+    return result;
 }

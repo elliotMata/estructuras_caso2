@@ -18,6 +18,7 @@ private:
 public:
     Casa(json configProcesos, vector<string> procesos) {}
 
+    List<Persona> getTrabajadoresDisponibles();
     void *sacarCemento(int cantidad);       // simula el sacar un saco de cemento de la bodega
     void guardarCemento(int cantidad);      // simula el guardar un saco de cemento en la bodega
     int getCantidadCemento();               // hace inventario de cuantos sacos de cemento hay en la bodega

@@ -10,7 +10,12 @@ Constructora::Constructora()
 
 void Constructora::llamarTrabajadores()
 {
-    // TODO
+    vector<string> trabajadores = casa->getProcesoActual()->getPersonalFaltante();
+    for (const string &trabajador : trabajadores)
+    {
+        Persona cuadrilla = jefe->llamarTrabajadores(trabajador);
+        casa->checkIn(cuadrilla);
+    }
 }
 
 void Constructora::comprarMaterial()
