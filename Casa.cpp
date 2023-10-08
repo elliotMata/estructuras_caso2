@@ -21,13 +21,21 @@ void Casa::agregarProceso(Proceso *proceso)
 
 Proceso *Casa::getProcesoActual()
 {
-    return procesos->front();
+    return procesos->front()->getData();
 }
 
 void Casa::siguienteProceso()
 {
     procesos->dequeue();
     checkOut();
+}
+
+bool Casa::hayMasProcesos ()
+{
+    if (procesos->isEmpty()){
+        return false;
+    }
+    return true;
 }
 
 void Casa::sacarCemento(int cantidad)
@@ -116,14 +124,14 @@ Queue<Persona>* Casa::getTrabajadores()
     return this->trabajadores;
 }
 
-Queue<Persona>* Casa::getTrabajadoresDisponibles()
+List<Persona>* Casa::getTrabajadoresDisponibles()
 {
     List<Persona> *result = new List<Persona>();
     Queue<Persona> *trabajadoresTemp = trabajadores;
     map<string, int> counts;
     while (!trabajadoresTemp->isEmpty())
     {
-        string tipo = trabajadoresTemp->front()->getTipoPersona();
+        string tipo = trabajadoresTemp->front()->getData()->getTipoPersona();
         counts[tipo]++;
         trabajadoresTemp->dequeue();
     }

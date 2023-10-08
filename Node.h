@@ -1,6 +1,9 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <iostream>
+using namespace std;
+
 template <typename T>
 class Node
 {
@@ -14,7 +17,7 @@ public:
     {
         this->data = pData;
         next = NULL;
-        previous = NULL;
+        prev = NULL;
     }
 
     T *getData()
@@ -32,9 +35,9 @@ public:
         return next;
     }
 
-    Node *getPrevious()
+    Node *getPrev()
     {
-        return previous;
+        return prev;
     }
 
     void setNext(Node *pValue)
@@ -42,9 +45,9 @@ public:
         this->next = pValue;
     }
 
-    void setPrevious(Node *pValue)
+    void setPrev(Node *pValue)
     {
-        this->previous = pValue;
+        this->prev = pValue;
     }
 };
 

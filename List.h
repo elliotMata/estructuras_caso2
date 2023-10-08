@@ -1,12 +1,15 @@
-#ifndef LIST_H
-#define LIST_H
-
-#include "Queue.h"
-#include "Stack.h"
 #include "Node.h"
+#include "Stack.h"
+#include "Queue.h"
+#include <unordered_map>
+
+#ifndef LIST
+#define LIST 1
+
+using namespace std;
 
 template <typename T>
-class List : public Queue<T>, public Stack<T>
+class List : public Stack<T>, public Queue<T>
 {
 private:
     Node<T> *first;
@@ -203,7 +206,7 @@ public:
         return result;
     }
 
-    T *front()
+    Node <T> *front()
     {
         return first;
     }

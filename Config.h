@@ -20,7 +20,7 @@ private:
     vector<string> procesos;
 
 public:
-    Config() {}
+    Config();
 
     json getConfigProcesos()
     {

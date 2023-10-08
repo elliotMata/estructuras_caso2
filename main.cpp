@@ -7,4 +7,7 @@ using namespace std;
 
 int main()
 {
+    Constructora constructora;
+    //constructora->iniciarConstruccion();
+    return 0;
 }

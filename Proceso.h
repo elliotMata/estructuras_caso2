@@ -24,7 +24,7 @@ private:
     List<Material> materialNecesario;
 
 public:
-    Proceso(json configProceso, string nombre) {}
+    Proceso(json configProceso, string nombre);
 
     string getNombreProceso()
     {
@@ -51,8 +51,8 @@ public:
         return this->materialFaltante;
     }
 
-    bool verificarPersonal(List<Persona> pPersonal) {}
-    bool verificarMaterial(int pCemento, int pMadera, int pDecor) {}
+    bool verificarPersonal(List<Persona> pPersonal);
+    bool verificarMaterial(int pCemento, int pMadera, int pDecor);
 };
 
 #endif

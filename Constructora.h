@@ -5,7 +5,10 @@
 #include "Comprador.h"
 #include "Jefe.h"
 #include "Config.h"
+
 #include <vector>
+#include <iostream>
+using namespace std;
 
 class Constructora
 {
