@@ -27,11 +27,10 @@ public:
         duracionMax = pConfig["Duracion"]["maximo"];
     }
 
-    Material *comprar(string pTipo)
+    Material comprar(string pTipo)
     {
         int compra = (rand() % (maxCompra - minCompra + 1)) + minCompra;
-        Material *materialComprado = new Material(pTipo, compra);
-        return materialComprado;
+        return Material(pTipo, compra);
     } // hilo, parametro es el tipo de material que quiere comprar, retorna un paquete del material comprado
 };
 

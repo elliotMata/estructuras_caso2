@@ -4,13 +4,16 @@
 #include "Casa.h"
 #include "Comprador.h"
 #include "Jefe.h"
+#include "Config.h"
+#include <vector>
 
 class Constructora
 {
 private:
     Casa *casa;
     Jefe *jefe;
-    Comprador *tienda;
+    Comprador *comprador;
+    Config *config;
 
 public:
     Constructora(); // se saca la info del json para darle valores a los atributos de los objetos
