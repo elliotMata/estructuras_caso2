@@ -16,6 +16,9 @@ Config::Config()
     this->configComprador = config["Comprador"];
     this->configJefe = config["Jefe"];
     this->configProcesos = config["ProcesosRequerimientos"];
-    this->procesos = config["procesos"];
+    for (string item : config["procesos"])
+    {
+        this->procesos.push_back(item);
+    }
     this->configDuraciones = config["Duraciones"];
 }

@@ -38,3 +38,25 @@ void Constructora::comprarMaterial()
         }
     }
 }
+
+void Constructora::iniciarConstruccion()
+{
+    while (casa->hayMasProcesos())
+    {
+        Proceso *procesoActual = casa->getProcesoActual();
+        cout << "Iniciando proceso: " << procesoActual->getNombreProceso() << endl;
+        while (!procesoActual->verificarMaterial(casa->getCantidadCemento(), casa->getCantidadMadera(), casa->getCantidadDecoraciones()))
+        {
+            cout << "Comprando materiales necesarios" << endl;
+            comprarMaterial();
+        }
+        while (!procesoActual->verificarPersonal(casa->getTrabajadoresDisponibles()))
+        {
+            cout << "Llamando personal necesario" << endl;
+            llamarTrabajadores();
+        }
+        cout << "Finalizando proceso: " << procesoActual->getNombreProceso() << endl;
+        casa->siguienteProceso();
+    }
+    cout << "Construccion finalizada!" << endl;
+}

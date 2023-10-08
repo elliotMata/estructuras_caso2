@@ -8,6 +8,6 @@ using namespace std;
 int main()
 {
     Constructora constructora;
-    //constructora->iniciarConstruccion();
+    constructora.iniciarConstruccion();
     return 0;
 }

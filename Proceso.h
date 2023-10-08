@@ -51,7 +51,7 @@ public:
         return this->materialFaltante;
     }
 
-    bool verificarPersonal(List<Persona> pPersonal);
+    bool verificarPersonal(List<Persona>* pPersonal);
     bool verificarMaterial(int pCemento, int pMadera, int pDecor);
 };
 

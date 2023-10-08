@@ -6,13 +6,13 @@
 using namespace std;
 using json = nlohmann::json;
 
-bool Proceso::verificarPersonal(List<Persona> pPersonal)
+bool Proceso::verificarPersonal(List<Persona>* pPersonal)
 {
     Persona *necesario, *disponible;
     for (int pos = 0; pos < personalNecesario.getSize(); pos++)
     {
         necesario = personalNecesario.find(pos);
-        disponible = pPersonal.find(pos);
+        disponible = pPersonal->find(pos);
         if (necesario->getCantidadPersona() > disponible->getCantidadPersona())
         {
             personalFaltante.push_back(necesario->getTipoPersona());
