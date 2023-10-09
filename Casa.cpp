@@ -128,6 +128,7 @@ void Casa::checkIn(Persona *pTrabajadores)
     {
         trabajadores->enqueue(new Persona(tipo, 1));
     }
+    // cout << trabajadores->getSize() << endl;
 }
 
 void Casa::checkOut()
@@ -146,7 +147,14 @@ Queue<Persona> *Casa::getTrabajadores()
 List<Persona> *Casa::getTrabajadoresDisponibles()
 {
     List<Persona> *result = new List<Persona>();
-    Queue<Persona> *trabajadoresTemp = trabajadores;
+    Queue<Persona> *trabajadoresTemp = new List<Persona>();
+    trabajadores->resetSearch();
+    while (trabajadores->next() != nullptr)
+    {
+        Persona *trabajador = trabajadores->next();
+        trabajadoresTemp->enqueue(new Persona(*trabajador));
+    }
+    // cout << trabajadores->getSize() << endl;
     map<string, int> counts;
     while (!trabajadoresTemp->isEmpty())
     {
@@ -158,5 +166,6 @@ List<Persona> *Casa::getTrabajadoresDisponibles()
     {
         result->add(new Persona(pair.first, pair.second));
     }
+    // cout << result->getSize() << endl;
     return result;
 }

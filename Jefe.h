@@ -37,7 +37,7 @@ public:
         maxDecoradores = pConfig["Decoradores"]["maximo"];
     };
 
-    Persona llamarTrabajadores(string pTipo)
+    Persona *llamarTrabajadores(string pTipo)
     {
         int cantidadLlamada = 0;
 
@@ -70,7 +70,7 @@ public:
             cantidadLlamada = (rand() % (maxDecoradores - minDecoradores + 1)) + minDecoradores;
         }
 
-        return Persona(pTipo, cantidadLlamada);
+        return new Persona(pTipo, cantidadLlamada);
     } // hilo, parametro es el tipo de trabajador que quiere llamar, retorna una cuadrilla de trabajadores
 };
 

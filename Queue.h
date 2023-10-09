@@ -10,6 +10,8 @@ public:
     virtual Node<T> *front() = 0;
     virtual bool isEmpty() = 0;
     virtual int getSize() = 0;
+    virtual T *next() = 0;
+    virtual void resetSearch() = 0;
 };
 
 #endif
