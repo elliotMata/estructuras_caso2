@@ -12,15 +12,12 @@ bool Proceso::verificarPersonal(List<Persona> *pPersonal)
     personalFaltante.clear();
     for (int pos = 0; pos < personalNecesario->getSize(); pos++)
     {
-
         necesario = personalNecesario->find(pos);
         if (!pPersonal->isEmpty())
         {
-            cout << pPersonal->getSize() << endl;
             for (int j = 0; j < pPersonal->getSize(); j++)
             {
                 disponible = pPersonal->find(j);
-                cout << disponible << endl;
                 if (necesario->getCantidadPersona() > disponible->getCantidadPersona())
                 {
                     personalFaltante.push_back(necesario->getTipoPersona());

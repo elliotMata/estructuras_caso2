@@ -154,7 +154,6 @@ List<Persona> *Casa::getTrabajadoresDisponibles()
         Persona *trabajador = trabajadores->next();
         trabajadoresTemp->enqueue(new Persona(*trabajador));
     }
-    // cout << trabajadores->getSize() << endl;
     map<string, int> counts;
     while (!trabajadoresTemp->isEmpty())
     {
@@ -166,6 +165,5 @@ List<Persona> *Casa::getTrabajadoresDisponibles()
     {
         result->add(new Persona(pair.first, pair.second));
     }
-    // cout << result->getSize() << endl;
     return result;
 }
