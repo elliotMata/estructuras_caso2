@@ -5,15 +5,14 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 #include "Material.h"
 #include "List.h"
 #include "Persona.h"
-#include "json.hpp"
-#include <vector>
+#include "Config.h"
 
 using namespace std;
-using json = nlohmann::json;
 
 class Proceso
 {
@@ -24,7 +23,7 @@ private:
     List<Material> *materialNecesario = new List<Material>();
 
 public:
-    Proceso(json configProceso, string nombre);
+    Proceso(Config *config, string nombre);
 
     string getNombreProceso()
     {

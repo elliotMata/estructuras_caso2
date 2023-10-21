@@ -68,6 +68,7 @@
             "maximoMateriales" : 75
         }
     },
+    
     "Jefe" : {
         "Abogados" : {
             "minimo" : 1,
@@ -102,6 +103,7 @@
             "maximo" : 3
         }
     },
+
     "Comprador" : {
         "Cantidades" : {
             "minimo" : 40,

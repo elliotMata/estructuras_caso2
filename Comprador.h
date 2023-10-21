@@ -8,8 +8,7 @@
 #include <vector>
 
 #include "Material.h"
-
-using json = nlohmann::json;
+#include "Config.h"
 
 using namespace std;
 
@@ -19,12 +18,12 @@ private:
     int minCompra, maxCompra, duracionMin, duracionMax;
 
 public:
-    Comprador(json pConfig)
+    Comprador(Config *config)
     {
-        minCompra = pConfig["Cantidades"]["minimo"];
-        maxCompra = pConfig["Cantidades"]["maximo"];
-        duracionMin = pConfig["Duracion"]["minimo"];
-        duracionMax = pConfig["Duracion"]["maximo"];
+        minCompra = config->getCompradorCantidadMinima();
+        maxCompra = config->getCompradorCantidadMaxima();
+        duracionMin = config->getCompradorDuracionMinima();
+        duracionMax = config->getCompradorDuracionMaxima();
     }
 
     Material comprar(string pTipo)

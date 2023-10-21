@@ -1,13 +1,14 @@
 #ifndef CONSTRUCTORA_H
 #define CONSTRUCTORA_H
 
+#include <vector>
+#include <iostream>
+
 #include "Casa.h"
 #include "Comprador.h"
 #include "Jefe.h"
 #include "Config.h"
 
-#include <vector>
-#include <iostream>
 using namespace std;
 
 class Constructora

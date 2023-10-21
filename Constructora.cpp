@@ -6,9 +6,9 @@
 Constructora::Constructora()
 {
     config = new Config();
-    casa = new Casa(config->getConfigProcesos(), config->getProcesos());
-    jefe = new Jefe(config->getConfigJefe());
-    comprador = new Comprador(config->getConfigComprador());
+    casa = new Casa(config, config->getProcesos());
+    jefe = new Jefe(config);
+    comprador = new Comprador(config);
 }
 
 void Constructora::llamarTrabajadores()
@@ -87,13 +87,14 @@ void Constructora::iniciarConstruccion()
             comprarMaterial();
             imprimirMateriales(casa);
         }
-        /*
-        while (!procesoActual->verificarPersonal(casa->getTrabajadoresDisponibles()))
+        
+        /*while (!procesoActual->verificarPersonal(casa->getTrabajadoresDisponibles()))
         {
             // cout << "Llamando personal necesario" << endl;
             // cout << casa->getTrabajadoresDisponibles()->getSize() << endl;
             llamarTrabajadores();
         }*/
+        
         cout << "Finalizando proceso: " << procesoActual->getNombreProceso() << endl;
         casa->siguienteProceso();
     }

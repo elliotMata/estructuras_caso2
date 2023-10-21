@@ -3,11 +3,10 @@
 
 #include "List.h"
 #include "Proceso.h"
-#include <string>
-#include "json.hpp"
-#include <vector>
+#include "Config.h"
 
-using json = nlohmann::json;
+#include <string>
+#include <vector>
 
 class Casa
 {
@@ -16,7 +15,7 @@ private:
     Stack<Material> *cemento, *madera, *decoraciones; // pilas de los diferentes materiales
     Queue<Persona> *trabajadores;                     // esta es la cola que simula el check-in y check-out de los trabajadores
 public:
-    Casa(json configProcesos, vector<string> procesos);
+    Casa(Config *config, vector<string> procesos);
 
     List<Persona>* getTrabajadoresDisponibles();
     Queue<Persona>* getTrabajadores();

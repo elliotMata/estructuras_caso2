@@ -1,11 +1,12 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "json.hpp"
-
 #include <string>
 #include <iostream>
+#include <unordered_map> 
 #include <vector>
+
+#include "json.hpp"
 
 using json = nlohmann::json;
 using namespace std;
@@ -17,35 +18,38 @@ private:
     json configDuraciones;
     json configComprador;
     json configJefe;
+    unordered_map <string, json> requisitosProcesos;
     vector<string> procesos;
+
+    void createMap ();
 
 public:
     Config();
+    
+    vector<string> getProcesoTipoTrabajador(string proceso);
+    int getProcesoMinimoTrabajadores(string proceso);
+    int getProcesoMaximoTrabajadores(string proceso);
+    vector<string> getProcesoTipoMaterial(string proceso);
+    int getProcesoMinimoMateriales(string proceso);
+    int getProcesoMaximoMateriales(string proceso);
+    int getProcesoSizeRequisitos(string proceso);
 
-    json getConfigProcesos()
-    {
-        return this->configProcesos;
-    }
+    int getCompradorCantidadMinima();
+    int getCompradorCantidadMaxima();
+    int getCompradorDuracionMinima();
+    int getCompradorDuracionMaxima();
 
-    json getConfigDuraciones()
-    {
-        return this->configDuraciones;
-    }
+    int getJefeMinimoPersonal(string tipo);
+    int getJefeMaximoPersonal(string tipo);
+    int getJefeDuracionMinima();
+    int getJefeDuracionMaxima();
 
-    json getConfigComprador()
-    {
-        return this->configComprador;
-    }
+    int getDuracionProcesoMinima();
+    int getDuracionProcesoMaxima();
+    int getDuracionRevisionMinima();
+    int getDuracionRevisionMaxima();
 
-    json getConfigJefe()
-    {
-        return this->configJefe;
-    }
-
-    vector<string> getProcesos()
-    {
-        return this->procesos;
-    }
+    vector<string> getProcesos();
 };
 
 #endif

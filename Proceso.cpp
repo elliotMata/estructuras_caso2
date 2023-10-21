@@ -1,10 +1,10 @@
+#include <vector>
+
 #include "Proceso.h"
 #include "List.h"
 #include "Persona.h"
-#include <vector>
 
 using namespace std;
-using json = nlohmann::json;
 
 bool Proceso::verificarPersonal(List<Persona> *pPersonal)
 {
@@ -64,22 +64,22 @@ bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
     return materialFaltante.empty();
 }
 
-Proceso::Proceso(json configProceso, string nombre)
+Proceso::Proceso(Config *config, string nombre)
 {
     this->nombreProceso = nombre;
-    int minPersonal = configProceso["minimoTrabajadores"];
-    int maxPersonal = configProceso["maximoTrabajadores"];
-    vector<string> personal = configProceso["tipoTrabajadores"];
+    int minPersonal = config->getProcesoMinimoTrabajadores(nombre);
+    int maxPersonal = config->getProcesoMaximoTrabajadores(nombre);
+    vector<string> personal = config->getProcesoTipoTrabajador(nombre);
     for (const string &trabajador : personal)
     {
         int cantidadNecesaria = (rand() % (maxPersonal - minPersonal + 1)) + minPersonal;
         this->personalNecesario->add(new Persona(trabajador, cantidadNecesaria));
     }
-    if (configProceso.size() > 3)
+    if (config->getProcesoSizeRequisitos(nombre) > 3)
     {
-        int minMaterial = configProceso["minimoMateriales"];
-        int maxMaterial = configProceso["maximoMateriales"];
-        vector<string> materiales = configProceso["tipoMateriales"];
+        int minMaterial = config->getProcesoMinimoMateriales(nombre);
+        int maxMaterial = config->getProcesoMaximoMateriales(nombre);
+        vector<string> materiales = config->getProcesoTipoMaterial(nombre);
         for (const string &material : materiales)
         {
             int cantidadNecesaria = (rand() % (maxMaterial - minMaterial + 1)) + minMaterial;

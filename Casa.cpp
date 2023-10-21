@@ -1,7 +1,7 @@
 #include "Casa.h"
 #include <map>
 
-Casa::Casa(json configProcesos, vector<string> procesos)
+Casa::Casa(Config *config, vector<string> procesos)
 {
     this->procesos = new List<Proceso>();
     this->cemento = new List<Material>();
@@ -10,7 +10,7 @@ Casa::Casa(json configProcesos, vector<string> procesos)
     this->trabajadores = new List<Persona>();
     for (const string &proceso : procesos)
     {
-        agregarProceso(new Proceso(configProcesos[proceso], proceso));
+        agregarProceso(new Proceso(config, proceso));
     }
 }
 

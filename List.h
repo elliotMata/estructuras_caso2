@@ -1,10 +1,11 @@
+#ifndef _LIST_
+#define _LIST_
+
+#include <unordered_map>
+
 #include "Node.h"
 #include "Stack.h"
 #include "Queue.h"
-#include <unordered_map>
-
-#ifndef LIST
-#define LIST 1
 
 using namespace std;
 
