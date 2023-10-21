@@ -26,6 +26,7 @@ private:
 public:
     Config();
     
+    // metodos para los procesos
     vector<string> getProcesoTipoTrabajador(string proceso);
     int getProcesoMinimoTrabajadores(string proceso);
     int getProcesoMaximoTrabajadores(string proceso);
@@ -34,16 +35,19 @@ public:
     int getProcesoMaximoMateriales(string proceso);
     int getProcesoSizeRequisitos(string proceso);
 
+    // metodos para el comprador
     int getCompradorCantidadMinima();
     int getCompradorCantidadMaxima();
     int getCompradorDuracionMinima();
     int getCompradorDuracionMaxima();
 
+    // metodos para el jefe
     int getJefeMinimoPersonal(string tipo);
     int getJefeMaximoPersonal(string tipo);
     int getJefeDuracionMinima();
     int getJefeDuracionMaxima();
 
+    // metodos para la duracion
     int getDuracionProcesoMinima();
     int getDuracionProcesoMaxima();
     int getDuracionRevisionMinima();

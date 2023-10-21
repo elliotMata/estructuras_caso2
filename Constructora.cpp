@@ -27,18 +27,7 @@ void Constructora::comprarMaterial()
     for (const string &material : materiales)
     {
         Material paquete = comprador->comprar(material);
-        if (material == "Cemento")
-        {
-            casa->guardarCemento(paquete.getCantidadMaterial());
-        }
-        else if (material == "Madera")
-        {
-            casa->guardarMadera(paquete.getCantidadMaterial());
-        }
-        else
-        {
-            casa->guardarDecoracion(paquete.getCantidadMaterial());
-        }
+        casa->guardarMaterial(paquete.getCantidadMaterial(), material);
     }
 }
 
@@ -47,9 +36,9 @@ void imprimirMateriales (Casa *casa)
     cout << "\n*********************************" << endl;
     cout << "*      CANTIDAD MATERIALES      *" << endl;
     cout << "*-------------------------------*" << endl;
-    cout << "* Cemento > " << std::setw(3) << std::setfill(' ') << casa->getCantidadCemento () << "                 *" << endl;
-    cout << "*  Madera > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMadera () << "                 *" << endl;
-    cout << "*   Decor > " << std::setw(3) << std::setfill(' ') << casa->getCantidadDecoraciones () << "                 *" << endl;
+    cout << "* Cemento > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial ("Cemento") << "                 *" << endl;
+    cout << "*  Madera > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial ("Madera") << "                 *" << endl;
+    cout << "*   Decor > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial ("Decoraciones") << "                 *" << endl;
     cout << "*********************************\n" << endl;
 }
 
@@ -81,7 +70,7 @@ void Constructora::iniciarConstruccion()
         cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
         cout << "\n\033[1;36mIniciando proceso: " << procesoActual->getNombreProceso() << "\033[0m" << endl;
         imprimirMaterialNecesario(casa);
-        while (!procesoActual->verificarMaterial(casa->getCantidadCemento(), casa->getCantidadMadera(), casa->getCantidadDecoraciones()))
+        while (!procesoActual->verificarMaterial(casa->getCantidadMaterial("Cemento"), casa->getCantidadMaterial("Madera"), casa->getCantidadMaterial("Decoraciones")))
         {
             cout << "Comprando materiales necesarios" << endl;
             comprarMaterial();

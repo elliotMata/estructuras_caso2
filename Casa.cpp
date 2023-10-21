@@ -12,6 +12,14 @@ Casa::Casa(Config *config, vector<string> procesos)
     {
         agregarProceso(new Proceso(config, proceso));
     }
+    crearMapaPilas();
+}
+
+void Casa::crearMapaPilas()
+{
+    pilasMateriales.insert(make_pair("Cemento", cemento));
+    pilasMateriales.insert(make_pair("Madera", madera));
+    pilasMateriales.insert(make_pair("Decoraciones", decoraciones));
 }
 
 void Casa::agregarProceso(Proceso *proceso)
@@ -31,18 +39,7 @@ void Casa::siguienteProceso()
     for (int pos = 0; pos < materiales->getSize(); pos++)
     {
         materialActual = materiales->find(pos);
-        if (materialActual->getNombreMaterial() == "Cemento")
-        {
-            sacarCemento(materialActual->getCantidadMaterial());
-        }
-        else if (materialActual->getNombreMaterial() == "Madera")
-        {
-            sacarMadera(materialActual->getCantidadMaterial());
-        }
-        else
-        {
-            sacarDecoracion(materialActual->getCantidadMaterial());
-        }
+        sacarMaterial(materialActual->getCantidadMaterial(), materialActual->getNombreMaterial());
     }
     procesos->dequeue();
     checkOut();
@@ -57,67 +54,28 @@ bool Casa::hayMasProcesos()
     return true;
 }
 
-void Casa::sacarCemento(int cantidad)
+void Casa::sacarMaterial(int cantidad, string material)
 {
+    Stack<Material> *pila = pilasMateriales.at(material);
     while (cantidad-- > 0)
     {
-        cemento->pop();
+        pila->pop();
     }
 }
 
-void Casa::sacarDecoracion(int cantidad)
+void Casa::guardarMaterial(int cantidad, string material)
 {
+    Stack<Material> *pila = pilasMateriales.at(material);
     while (cantidad-- > 0)
     {
-        decoraciones->pop();
+        pila->push(new Material(material, 1));
     }
 }
 
-void Casa::sacarMadera(int cantidad)
+int Casa::getCantidadMaterial(string material)
 {
-    while (cantidad-- > 0)
-    {
-        madera->pop();
-    }
-}
-
-void Casa::guardarCemento(int cantidad)
-{
-    while (cantidad-- > 0)
-    {
-        cemento->push(new Material("Cemento", 1));
-    }
-}
-
-void Casa::guardarDecoracion(int cantidad)
-{
-    while (cantidad-- > 0)
-    {
-        decoraciones->push(new Material("Decoraciones", 1));
-    }
-}
-
-void Casa::guardarMadera(int cantidad)
-{
-    while (cantidad-- > 0)
-    {
-        madera->push(new Material("Madera", 1));
-    }
-}
-
-int Casa::getCantidadCemento()
-{
-    return cemento->getSize();
-}
-
-int Casa::getCantidadDecoraciones()
-{
-    return decoraciones->getSize();
-}
-
-int Casa::getCantidadMadera()
-{
-    return madera->getSize();
+    Stack<Material> *pila = pilasMateriales.at(material);
+    return pila->getSize();
 }
 
 void Casa::checkIn(Persona *pTrabajadores)

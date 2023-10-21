@@ -1,33 +1,36 @@
 #ifndef CASA_H
 #define CASA_H
 
+#include <string>
+#include <iostream>
+#include <unordered_map> 
+#include <vector>
+
 #include "List.h"
 #include "Proceso.h"
 #include "Config.h"
 
-#include <string>
-#include <vector>
+using namespace std;
 
 class Casa
 {
 private:
-    Queue<Proceso> *procesos;                         // esta es la cola de procesos para llevar a cabo a lo largo de la construccion
-    Stack<Material> *cemento, *madera, *decoraciones; // pilas de los diferentes materiales
-    Queue<Persona> *trabajadores;                     // esta es la cola que simula el check-in y check-out de los trabajadores
+    Queue<Proceso> *procesos;                               // esta es la cola de procesos para llevar a cabo a lo largo de la construccion
+    Stack<Material> *cemento, *madera, *decoraciones;       // pilas de los diferentes materiales
+    Queue<Persona> *trabajadores;                           // esta es la cola que simula el check-in y check-out de los trabajadores
+    unordered_map<string, Stack<Material>*> pilasMateriales;
+
+    void crearMapaPilas();
+
 public:
     Casa(Config *config, vector<string> procesos);
 
     List<Persona>* getTrabajadoresDisponibles();
     Queue<Persona>* getTrabajadores();
-    void sacarCemento(int cantidad);        // simula el sacar un saco de cemento de la bodega
-    void guardarCemento(int cantidad);      // simula el guardar un saco de cemento en la bodega
-    int getCantidadCemento();               // hace inventario de cuantos sacos de cemento hay en la bodega
-    void sacarMadera(int cantidad);         // simula el sacar una regla de madera de la bodega
-    void guardarMadera(int cantidad);       // simula el guardar una regla de madera en la bodega
-    int getCantidadMadera();                // hace inventario de cuantas reglas de madera hay en la bodega
-    void sacarDecoracion(int cantidad);     // simula el sacar una decoracion de la bodega
-    void guardarDecoracion(int cantidad);   // simula el guardar una decoracion en la bodega
-    int getCantidadDecoraciones();          // hace inventario de cuantas decoraciones hay en la bodega
+    void sacarMaterial(int cantidad, string material);
+    void guardarMaterial(int cantidad, string material);
+    int getCantidadMaterial(string material);
+
     Proceso *getProcesoActual();            // devuelve el proceso actual para acceder a su informacion
     void siguienteProceso();                // avanza la cola de procesos
     bool hayMasProcesos ();                 // indica si hay mas procesos por ejecutar

@@ -13,6 +13,7 @@ Config::Config()
     json config;
     config_file >> config;
     config_file.close();
+    
     this->configComprador = config["Comprador"];
     this->configJefe = config["Jefe"];
     this->configProcesos = config["ProcesosRequerimientos"];
