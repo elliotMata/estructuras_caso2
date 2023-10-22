@@ -1,4 +1,5 @@
 #include <vector>
+#include <unordered_map>
 
 #include "Proceso.h"
 #include "List.h"
@@ -32,33 +33,16 @@ bool Proceso::verificarPersonal(List<Persona> *pPersonal)
     return personalFaltante.empty();
 }
 
-bool Proceso::verificarMaterial(int pCemento, int pMadera, int pDecor)
+bool Proceso::verificarMaterial(unordered_map<string, int> disponibles)
 {
     Material *necesario;
     materialFaltante.clear();
     for (int pos = 0; pos < materialNecesario->getSize(); pos++)
     {
         necesario = materialNecesario->find(pos);
-        if (necesario->getNombreMaterial() == "Cemento")
+        if (necesario->getCantidadMaterial() > disponibles[necesario->getNombreMaterial()])
         {
-            if (necesario->getCantidadMaterial() > pCemento)
-            {
-                materialFaltante.push_back("Cemento");
-            }
-        }
-        if (necesario->getNombreMaterial() == "Madera")
-        {
-            if (necesario->getCantidadMaterial() > pMadera)
-            {
-                materialFaltante.push_back("Madera");
-            }
-        }
-        if (necesario->getNombreMaterial() == "Decoraciones")
-        {
-            if (necesario->getCantidadMaterial() > pDecor)
-            {
-                materialFaltante.push_back("Decoraciones");
-            }
+            materialFaltante[necesario->getNombreMaterial()] = necesario->getCantidadMaterial() - disponibles[necesario->getNombreMaterial()];
         }
     }
     return materialFaltante.empty();

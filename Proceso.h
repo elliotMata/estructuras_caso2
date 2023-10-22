@@ -19,8 +19,9 @@ class Proceso
 private:
     string nombreProceso;
     List<Persona> *personalNecesario = new List<Persona>();
-    vector<string> personalFaltante, materialFaltante;
+    vector<string> personalFaltante;
     List<Material> *materialNecesario = new List<Material>();
+    unordered_map<string, int> materialFaltante;
 
 public:
     Proceso(Config *config, string nombre);
@@ -30,7 +31,7 @@ public:
         return this->nombreProceso;
     }
 
-    List<Persona>* getPersonalNecesario()
+    List<Persona> *getPersonalNecesario()
     {
         return this->personalNecesario;
     }
@@ -40,18 +41,18 @@ public:
         return this->personalFaltante;
     }
 
-    List<Material>* getMaterialNecesario()
+    List<Material> *getMaterialNecesario()
     {
         return this->materialNecesario;
     }
 
-    vector<string> getMaterialFaltante()
+    unordered_map<string, int> getMaterialFaltante()
     {
         return this->materialFaltante;
     }
 
-    bool verificarPersonal(List<Persona>* pPersonal);
-    bool verificarMaterial(int pCemento, int pMadera, int pDecor);
+    bool verificarPersonal(List<Persona> *pPersonal);
+    bool verificarMaterial(unordered_map<string, int> disponibles);
 };
 
 #endif

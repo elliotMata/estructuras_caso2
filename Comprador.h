@@ -26,9 +26,13 @@ public:
         duracionMax = config->getCompradorDuracionMaxima();
     }
 
-    Material comprar(string pTipo)
+    Material comprar(string pTipo, int pCantidad)
     {
-        int compra = (rand() % (maxCompra - minCompra + 1)) + minCompra;
+        int compra = 0;
+        while (compra < pCantidad)
+        {
+            compra += (rand() % (maxCompra - minCompra + 1)) + minCompra;
+        }
         return Material(pTipo, compra);
     } // hilo, parametro es el tipo de material que quiere comprar, retorna un paquete del material comprado
 };

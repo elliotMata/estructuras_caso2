@@ -23,26 +23,27 @@ void Constructora::llamarTrabajadores()
 
 void Constructora::comprarMaterial()
 {
-    vector<string> materiales = casa->getProcesoActual()->getMaterialFaltante();
-    for (const string &material : materiales)
+    unordered_map<string, int> materiales = casa->getProcesoActual()->getMaterialFaltante();
+    for (const auto &pair : materiales)
     {
-        Material paquete = comprador->comprar(material);
-        casa->guardarMaterial(paquete.getCantidadMaterial(), material);
+        Material paquete = comprador->comprar(pair.first, pair.second);
+        casa->guardarMaterial(paquete.getCantidadMaterial(), paquete.getNombreMaterial());
     }
 }
 
-void imprimirMateriales (Casa *casa)
+void imprimirMateriales(Casa *casa)
 {
     cout << "\n*********************************" << endl;
     cout << "*      CANTIDAD MATERIALES      *" << endl;
     cout << "*-------------------------------*" << endl;
-    cout << "* Cemento > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial ("Cemento") << "                 *" << endl;
-    cout << "*  Madera > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial ("Madera") << "                 *" << endl;
-    cout << "*   Decor > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial ("Decoraciones") << "                 *" << endl;
-    cout << "*********************************\n" << endl;
+    cout << "* Cemento > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Cemento") << "                 *" << endl;
+    cout << "*  Madera > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Madera") << "                 *" << endl;
+    cout << "*   Decor > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Decoraciones") << "                 *" << endl;
+    cout << "*********************************\n"
+         << endl;
 }
 
-void imprimirMaterialNecesario (Casa *casa)
+void imprimirMaterialNecesario(Casa *casa)
 {
     List<Material> *materialNecesario = casa->getProcesoActual()->getMaterialNecesario();
     cout << "\n*********************************" << endl;
@@ -58,7 +59,8 @@ void imprimirMaterialNecesario (Casa *casa)
         }
         cout << "* " << std::setw(7) << std::setfill(' ') << nombre << " > " << material->getCantidadMaterial() << "                  *" << endl;
     }
-    cout << "*********************************\n" << endl;
+    cout << "*********************************\n"
+         << endl;
 }
 
 void Constructora::iniciarConstruccion()
@@ -70,22 +72,23 @@ void Constructora::iniciarConstruccion()
         cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
         cout << "\n\033[1;36mIniciando proceso: " << procesoActual->getNombreProceso() << "\033[0m" << endl;
         imprimirMaterialNecesario(casa);
-        while (!procesoActual->verificarMaterial(casa->getCantidadMaterial("Cemento"), casa->getCantidadMaterial("Madera"), casa->getCantidadMaterial("Decoraciones")))
+        while (!procesoActual->verificarMaterial(casa->getMaterialesDisponibles()))
         {
             cout << "Comprando materiales necesarios" << endl;
             comprarMaterial();
             imprimirMateriales(casa);
         }
-        
+
         /*while (!procesoActual->verificarPersonal(casa->getTrabajadoresDisponibles()))
         {
             // cout << "Llamando personal necesario" << endl;
             // cout << casa->getTrabajadoresDisponibles()->getSize() << endl;
             llamarTrabajadores();
         }*/
-        
+
         cout << "Finalizando proceso: " << procesoActual->getNombreProceso() << endl;
         casa->siguienteProceso();
     }
-    cout << "\n\033[1;36mCONSTRUCCION FINALIZADA!\033[0m\n" << endl;
+    cout << "\n\033[1;36mCONSTRUCCION FINALIZADA!\033[0m\n"
+         << endl;
 }

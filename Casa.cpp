@@ -125,3 +125,13 @@ List<Persona> *Casa::getTrabajadoresDisponibles()
     }
     return result;
 }
+
+unordered_map<string, int> Casa::getMaterialesDisponibles()
+{
+    unordered_map<string, int> result;
+    for (const auto &pair : pilasMateriales)
+    {
+        result[pair.first] = pair.second->getSize();
+    }
+    return result;
+}
