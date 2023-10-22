@@ -41,8 +41,23 @@ void imprimirMateriales(Casa *casa)
     cout << "* Cemento > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Cemento") << "                 *" << endl;
     cout << "*  Madera > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Madera") << "                 *" << endl;
     cout << "*   Decor > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Decoraciones") << "                 *" << endl;
-    cout << "*********************************\n"
-         << endl;
+    cout << "*********************************\n" << endl;
+}
+
+void imprimirPersonal(Casa *casa)
+{
+    int cantidadTrabajadores = casa->getTrabajadores()->getSize();
+    cout << "\n*********************************" << endl;
+    cout << "*       CANTIDAD PERSONAL       *" << endl;
+    cout << "*-------------------------------*" << endl;
+    cout << cantidadTrabajadores << endl;
+   
+    for (int i = 0; i < cantidadTrabajadores; i++)
+    {
+        cout << "* " << std::setw(16) << std::setfill(' ') << casa->getTrabajadores()->find(i)->getTipoPersona() + " > " << std::setw(9) << std::setfill(' ') << casa->getTrabajadores()->find(i)->getCantidadPersona() << "     *" << endl;
+    }
+
+    cout << "*********************************\n" << endl;
 }
 
 void imprimirMaterialNecesario(Casa *casa)
@@ -83,8 +98,9 @@ void Constructora::iniciarConstruccion()
 
         if (!procesoActual->verificarPersonal(casa->getTrabajadores()))
         {
-            // cout << "Llamando personal necesario" << endl;
+             cout << "Llamando personal necesario" << endl;
             llamarTrabajadores();
+            imprimirPersonal(casa);
         }
 
         cout << "Finalizando proceso: " << procesoActual->getNombreProceso() << endl;
