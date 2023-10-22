@@ -84,22 +84,20 @@ int Casa::getCantidadMaterial(string material)
 
 void Casa::checkIn(Persona *pTrabajadores)
 {
-    if (!trabajadores->isEmpty())
+    bool found = false;
+
+    for (int i = 0; i < trabajadores->getSize(); i++)
     {
-        for (int i = 0; i < trabajadores->getSize(); i++)
+        Persona *trabajador = trabajadores->find(i);
+        if (trabajador->getTipoPersona() == pTrabajadores->getTipoPersona())
         {
-            Persona *trabajador = trabajadores->find(i);
-            if (trabajador->getTipoPersona() == pTrabajadores->getTipoPersona())
-            {
-                trabajador->setCantidadPersona(trabajador->getCantidadPersona() + pTrabajadores->getCantidadPersona());
-            }
-            else
-            {
-                trabajadores->add(pTrabajadores);
-            }
+            trabajador->setCantidadPersona(trabajador->getCantidadPersona() + pTrabajadores->getCantidadPersona());
+            found = true;
+            break;
         }
     }
-    else
+
+    if (!found)
     {
         trabajadores->add(pTrabajadores);
     }
@@ -120,30 +118,6 @@ void Casa::checkOut(Persona *pTrabajadores)
 List<Persona> *Casa::getTrabajadores()
 {
     return this->trabajadores;
-}
-
-List<Persona> *Casa::getTrabajadoresDisponibles()
-{
-    List<Persona> *result = new List<Persona>();
-    Queue<Persona> *trabajadoresTemp = new List<Persona>();
-    trabajadores->resetSearch();
-    while (trabajadores->next() != nullptr)
-    {
-        Persona *trabajador = trabajadores->next();
-        trabajadoresTemp->enqueue(new Persona(*trabajador));
-    }
-    map<string, int> counts;
-    while (!trabajadoresTemp->isEmpty())
-    {
-        string tipo = trabajadoresTemp->front()->getData()->getTipoPersona();
-        counts[tipo]++;
-        trabajadoresTemp->dequeue();
-    }
-    for (const auto &pair : counts)
-    {
-        result->add(new Persona(pair.first, pair.second));
-    }
-    return result;
 }
 
 unordered_map<string, int> Casa::getMaterialesDisponibles()
