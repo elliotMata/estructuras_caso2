@@ -15,6 +15,11 @@ Casa::Casa(Config *config, vector<string> procesos)
     crearMapaPilas();
 }
 
+Queue<Proceso> *Casa::getProcesos()
+{
+    return procesos;
+}
+
 void Casa::crearMapaPilas()
 {
     pilasMateriales.insert(make_pair("Cemento", cemento));

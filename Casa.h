@@ -27,6 +27,7 @@ public:
 
     List<Persona> *getTrabajadoresDisponibles();
     List<Persona> *getTrabajadores();
+    Queue<Proceso> *getProcesos();
     void sacarMaterial(int cantidad, string material);
     void guardarMaterial(int cantidad, string material);
     int getCantidadMaterial(string material);
