@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include <unordered_map> 
+#include <unordered_map>
 #include <vector>
 
 #include "json.hpp"
@@ -18,14 +18,14 @@ private:
     json configDuraciones;
     json configComprador;
     json configJefe;
-    unordered_map <string, json> requisitosProcesos;
+    unordered_map<string, json> requisitosProcesos;
     vector<string> procesos;
 
-    void createMap ();
+    void createMap();
 
 public:
     Config();
-    
+
     // metodos para los procesos
     vector<string> getProcesoTipoTrabajador(string proceso);
     int getProcesoMinimoTrabajadores(string proceso);
@@ -52,6 +52,7 @@ public:
     int getDuracionProcesoMaxima();
     int getDuracionRevisionMinima();
     int getDuracionRevisionMaxima();
+    int getDuracionHoraSimulador();
 
     vector<string> getProcesos();
 };

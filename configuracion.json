@@ -1,7 +1,4 @@
 {
-    "_comment0" : "los tiempos son en horas; una hora real equivale a 15 segundos (15000 milisegundos) en simulacion",
-    "tiempoSimulacionHora" : 15000,
-
     "_comment1" : "elementos necesarios en el sistema; para el proceso de revestimiento y aislamiento, el personal encargado es el de construccion",
     "procesos" : ["Permisos", "Excavacion", "Cimientos", "Framing", "Roofing", "PlomeriaCableado", "RevestimientoAislantes", "Acabados"],
     "personal" : ["Abogados", "Constructores", "Maquinaria", "Techos", "Plomeria", "Cableado", "Decoradores"],
@@ -123,6 +120,8 @@
         "Revision" : {
             "minimo" : 0.5,
             "maximo" : 2
-        }
+        },
+        "_comment0" : "los tiempos son en horas; una hora real equivale a 15 segundos (15000 milisegundos) en simulacion",
+        "HoraSimulador" : 1000
     }
 }

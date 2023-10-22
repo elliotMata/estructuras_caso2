@@ -22,6 +22,7 @@ private:
     unordered_map<string, int> personalFaltante;
     List<Material> *materialNecesario = new List<Material>();
     unordered_map<string, int> materialFaltante;
+    int minDuracionRevision, maxDuracionRevision, minDuracion, maxDuracion;
 
 public:
     Proceso(Config *config, string nombre);
@@ -49,6 +50,26 @@ public:
     unordered_map<string, int> getMaterialFaltante()
     {
         return this->materialFaltante;
+    }
+
+    int getMinDuracion()
+    {
+        return this->minDuracion;
+    }
+
+    int getMaxDuracion()
+    {
+        return this->maxDuracion;
+    }
+
+    int getMinDuracionRevision()
+    {
+        return this->minDuracionRevision;
+    }
+
+    int getMaxDuracionRevision()
+    {
+        return this->maxDuracionRevision;
     }
 
     bool verificarPersonal(List<Persona> *pPersonal);

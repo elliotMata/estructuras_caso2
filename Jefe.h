@@ -39,7 +39,7 @@ public:
             cantidadLlamada += (rand() % (maxPersonal - minPersonal + 1)) + minPersonal;
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(((rand() % (maxDuracion - minDuracion + 1)) + minDuracion) * 1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(((rand() % (maxDuracion - minDuracion + 1)) + minDuracion) * config->getDuracionHoraSimulador()));
 
         return new Persona(pTipo, cantidadLlamada);
     } // hilo, parametro es el tipo de trabajador que quiere llamar, retorna una cuadrilla de trabajadores

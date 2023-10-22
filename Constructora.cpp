@@ -105,11 +105,14 @@ void Constructora::iniciarConstruccion()
             cout << "Llamando personal necesario" << endl;
             thread2 = thread(&Constructora::llamarTrabajadores, this);
         }
+        cout << "Realizando proceso: " << procesoActual->getNombreProceso() << endl;
+        this_thread::sleep_for(chrono::milliseconds(((rand() % (procesoActual->getMaxDuracion() - procesoActual->getMinDuracion() + 1)) + procesoActual->getMinDuracion()) * config->getDuracionHoraSimulador()));
         if (thread1.joinable())
             thread1.join();
         if (thread2.joinable())
             thread2.join();
-        cout << "Finalizando proceso: " << procesoActual->getNombreProceso() << endl;
+        cout << "Revisando finalizacion de proceso: " << procesoActual->getNombreProceso() << endl;
+        this_thread::sleep_for(chrono::milliseconds(((rand() % (procesoActual->getMaxDuracionRevision() - procesoActual->getMinDuracionRevision() + 1)) + procesoActual->getMinDuracionRevision()) * config->getDuracionHoraSimulador()));
         casa->siguienteProceso();
     }
     cout << "\n\033[1;36mCONSTRUCCION FINALIZADA!\033[0m\n"

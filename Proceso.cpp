@@ -72,4 +72,8 @@ Proceso::Proceso(Config *config, string nombre)
             this->materialNecesario->add(new Material(material, cantidadNecesaria));
         }
     }
+    this->minDuracionRevision = config->getDuracionRevisionMinima();
+    this->maxDuracionRevision = config->getDuracionRevisionMaxima();
+    this->minDuracion = config->getDuracionProcesoMinima();
+    this->maxDuracion = config->getDuracionProcesoMaxima();
 }

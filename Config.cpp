@@ -13,7 +13,7 @@ Config::Config()
     json config;
     config_file >> config;
     config_file.close();
-    
+
     this->configComprador = config["Comprador"];
     this->configJefe = config["Jefe"];
     this->configProcesos = config["ProcesosRequerimientos"];
@@ -39,37 +39,37 @@ vector<string> Config::getProcesoTipoTrabajador(string proceso)
     return items["tipoTrabajadores"];
 }
 
-int Config::getProcesoMinimoTrabajadores (string proceso)
+int Config::getProcesoMinimoTrabajadores(string proceso)
 {
     json items = requisitosProcesos.at(proceso);
     return items["minimoTrabajadores"];
 }
 
-int Config::getProcesoMaximoTrabajadores (string proceso)
+int Config::getProcesoMaximoTrabajadores(string proceso)
 {
     json items = requisitosProcesos.at(proceso);
     return items["maximoTrabajadores"];
 }
 
-vector<string> Config::getProcesoTipoMaterial (string proceso)
+vector<string> Config::getProcesoTipoMaterial(string proceso)
 {
     json items = requisitosProcesos.at(proceso);
     return items["tipoMateriales"];
 }
 
-int Config::getProcesoMinimoMateriales (string proceso)
+int Config::getProcesoMinimoMateriales(string proceso)
 {
     json items = requisitosProcesos.at(proceso);
     return items["minimoMateriales"];
 }
 
-int Config::getProcesoMaximoMateriales (string proceso)
+int Config::getProcesoMaximoMateriales(string proceso)
 {
     json items = requisitosProcesos.at(proceso);
     return items["maximoMateriales"];
 }
 
-int Config::getProcesoSizeRequisitos (string proceso)
+int Config::getProcesoSizeRequisitos(string proceso)
 {
     json items = requisitosProcesos.at(proceso);
     return items.size();
@@ -133,6 +133,11 @@ int Config::getDuracionRevisionMinima()
 int Config::getDuracionRevisionMaxima()
 {
     return configDuraciones["Revision"]["maximo"];
+}
+
+int Config::getDuracionHoraSimulador()
+{
+    return configDuraciones["HoraSimulador"];
 }
 
 vector<string> Config::getProcesos()

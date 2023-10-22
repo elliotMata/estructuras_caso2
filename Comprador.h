@@ -17,6 +17,7 @@ class Comprador
 {
 private:
     int minCompra, maxCompra, duracionMin, duracionMax;
+    Config *config;
 
 public:
     Comprador(Config *config)
@@ -25,6 +26,7 @@ public:
         maxCompra = config->getCompradorCantidadMaxima();
         duracionMin = config->getCompradorDuracionMinima();
         duracionMax = config->getCompradorDuracionMaxima();
+        this->config = config;
     }
 
     Material comprar(string pTipo, int pCantidad)
@@ -34,7 +36,7 @@ public:
         {
             compra += (rand() % (maxCompra - minCompra + 1)) + minCompra;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(((rand() % (duracionMax - duracionMin + 1)) + duracionMin) * 1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(((rand() % (duracionMax - duracionMin + 1)) + duracionMin) * config->getDuracionHoraSimulador()));
 
         return Material(pTipo, compra);
     } // hilo, parametro es el tipo de material que quiere comprar, retorna un paquete del material comprado
