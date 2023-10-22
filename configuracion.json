@@ -115,10 +115,10 @@
     "Duraciones" : {
         "Procesos" : {
             "minimo" : 5,
-            "maximo" : 15
+            "maximo" : 8
         },
         "Revision" : {
-            "minimo" : 0.5,
+            "minimo" : 1,
             "maximo" : 2
         },
         "_comment0" : "los tiempos son en horas; una hora real equivale a 15 segundos (15000 milisegundos) en simulacion",

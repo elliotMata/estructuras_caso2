@@ -4,16 +4,29 @@
 
 #include "Constructora.h"
 
+void imprimirProcesos (Casa *casa)
+{
+    int cantidadProcesos = casa->getProcesos()->getSize();
+    cout << "\n*********************************" << endl;
+    cout << "*       COLA DE PROCESOS        *" << endl;
+    cout << "*-------------------------------*" << endl;
+    casa->getProcesos()->resetSearch();
+    for (int i = 0; i < cantidadProcesos; i++)
+    {
+        cout << "* " << std::setw(22) << std::setfill(' ') << casa->getProcesos()->next()->getNombreProceso() <<  "        *" << endl;
+    }
+    cout << "*********************************" << endl;
+}
+
 void imprimirMateriales(Casa *casa)
 {
-    cout << "\n*********************************" << endl;
+    cout << "*********************************" << endl;
     cout << "*      CANTIDAD MATERIALES      *" << endl;
     cout << "*-------------------------------*" << endl;
-    cout << "* Cemento > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Cemento") << "                 *" << endl;
-    cout << "*  Madera > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Madera") << "                 *" << endl;
-    cout << "*   Decor > " << std::setw(3) << std::setfill(' ') << casa->getCantidadMaterial("Decoraciones") << "                 *" << endl;
-    cout << "*********************************\n"
-         << endl;
+    cout << "* " << std::setw(19) << std::setfill(' ') << "Pila cemento" << " > " << std::setw(5) << std::setfill(' ') << casa->getCantidadMaterial("Cemento") << "   *" << endl;
+    cout << "* " << std::setw(19) << std::setfill(' ') << "Pila madera" << " > " << std::setw(5) << std::setfill(' ') << casa->getCantidadMaterial("Madera") << "   *" << endl;
+    cout << "* " << std::setw(19) << std::setfill(' ') << "Pila decoraciones" << " > " <<std::setw(5) << std::setfill(' ') << casa->getCantidadMaterial("Decoraciones") << "   *" << endl;
+    cout << "*********************************\n" << endl;
 }
 
 void imprimirPersonal(Casa *casa)
@@ -22,15 +35,44 @@ void imprimirPersonal(Casa *casa)
     cout << "\n*********************************" << endl;
     cout << "*       CANTIDAD PERSONAL       *" << endl;
     cout << "*-------------------------------*" << endl;
-    // cout << cantidadTrabajadores << endl;
-
+   
     for (int i = 0; i < cantidadTrabajadores; i++)
     {
-        cout << "* " << std::setw(16) << std::setfill(' ') << casa->getTrabajadores()->find(i)->getTipoPersona() + " > " << std::setw(9) << std::setfill(' ') << casa->getTrabajadores()->find(i)->getCantidadPersona() << "     *" << endl;
+        cout << "* " << std::setw(22) << std::setfill(' ') << casa->getTrabajadores()->find(i)->getTipoPersona() + " > " << std::setw(5) << std::setfill(' ') << casa->getTrabajadores()->find(i)->getCantidadPersona() << "   *" << endl;
     }
 
-    cout << "*********************************\n"
-         << endl;
+    cout << "*********************************\n" << endl;
+}
+
+void imprimirMaterialNecesario(Casa *casa)
+{
+    List<Material> *materialNecesario = casa->getProcesoActual()->getMaterialNecesario();
+    cout << "*********************************" << endl;
+    cout << "*    MATERIALES NECESARIOS      *" << endl;
+    cout << "*-------------------------------*" << endl;
+    for (int i = 0; i < materialNecesario->getSize(); i++)
+    {
+        Material *material = materialNecesario->find(i);
+        string nombre = material->getNombreMaterial();
+        cout << "* " << std::setw(19) << std::setfill(' ') << nombre << " > " << std::setw(5) << std::setfill(' ') << material->getCantidadMaterial() << "   *" << endl;
+    }
+    cout << "*********************************\n" << endl;
+}
+
+void imprimirPersonalNecesario(Casa *casa)
+{
+    List<Persona> *personalNecesario = casa->getProcesoActual()->getPersonalNecesario();
+    cout << "*********************************" << endl;
+    cout << "*     PERSONAL NECESARIO        *" << endl;
+    cout << "*-------------------------------*" << endl;
+    for (int i = 0; i < personalNecesario->getSize(); i++)
+    {
+        Persona *persona = personalNecesario->find(i);
+        string nombre = persona->getTipoPersona();
+        cout << "* " << std::setw(19) << std::setfill(' ') << nombre << " > " << std::setw(5) << std::setfill(' ') << persona->getCantidadPersona() << "   *" << endl;
+    }
+    cout << "*********************************\n\n" << endl;
+    cout << "---------------------------------\n\n" << endl;
 }
 
 Constructora::Constructora()
@@ -63,26 +105,6 @@ void Constructora::comprarMaterial()
     imprimirMateriales(casa);
 }
 
-void imprimirMaterialNecesario(Casa *casa)
-{
-    List<Material> *materialNecesario = casa->getProcesoActual()->getMaterialNecesario();
-    cout << "\n*********************************" << endl;
-    cout << "*    MATERIALES NECESARIOS      *" << endl;
-    cout << "*-------------------------------*" << endl;
-    for (int i = 0; i < materialNecesario->getSize(); i++)
-    {
-        Material *material = materialNecesario->find(i);
-        string nombre = material->getNombreMaterial();
-        if (nombre == "Decoraciones")
-        {
-            nombre = "Decor";
-        }
-        cout << "* " << std::setw(7) << std::setfill(' ') << nombre << " > " << material->getCantidadMaterial() << "                  *" << endl;
-    }
-    cout << "*********************************\n"
-         << endl;
-}
-
 void Constructora::iniciarConstruccion()
 {
     cout << "\n\033[1;36m*** CONSTRUCCION DE LA CASA ***\033[0m" << endl;
@@ -93,6 +115,8 @@ void Constructora::iniciarConstruccion()
         Proceso *procesoActual = casa->getProcesoActual();
         cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
         cout << "\n\033[1;36mIniciando proceso: " << procesoActual->getNombreProceso() << "\033[0m" << endl;
+        imprimirProcesos(casa);
+        imprimirPersonal(casa);
         imprimirMaterialNecesario(casa);
         if (!procesoActual->verificarMaterial(casa->getMaterialesDisponibles()))
         {
@@ -115,6 +139,7 @@ void Constructora::iniciarConstruccion()
         this_thread::sleep_for(chrono::milliseconds(((rand() % (procesoActual->getMaxDuracionRevision() - procesoActual->getMinDuracionRevision() + 1)) + procesoActual->getMinDuracionRevision()) * config->getDuracionHoraSimulador()));
         casa->siguienteProceso();
     }
+    cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
     cout << "\n\033[1;36mCONSTRUCCION FINALIZADA!\033[0m\n"
          << endl;
 }
