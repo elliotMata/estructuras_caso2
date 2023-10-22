@@ -30,6 +30,11 @@ public:
     {
         return this->cantidadPersona;
     }
+
+    void setCantidadPersona(int pCant)
+    {
+        this->cantidadPersona = pCant;
+    }
 };
 
 #endif

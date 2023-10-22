@@ -19,7 +19,7 @@ class Proceso
 private:
     string nombreProceso;
     List<Persona> *personalNecesario = new List<Persona>();
-    vector<string> personalFaltante;
+    unordered_map<string, int> personalFaltante;
     List<Material> *materialNecesario = new List<Material>();
     unordered_map<string, int> materialFaltante;
 
@@ -36,7 +36,7 @@ public:
         return this->personalNecesario;
     }
 
-    vector<string> getPersonalFaltante()
+    unordered_map<string, int> getPersonalFaltante()
     {
         return this->personalFaltante;
     }

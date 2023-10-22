@@ -26,14 +26,17 @@ public:
         this->config = config;
     };
 
-    Persona *llamarTrabajadores(string pTipo)
+    Persona *llamarTrabajadores(string pTipo, int pCant)
     {
         int cantidadLlamada = 0;
 
         minPersonal = config->getJefeMinimoPersonal(pTipo);
         maxPersonal = config->getJefeMaximoPersonal(pTipo);
 
-        cantidadLlamada = (rand() % (maxPersonal - minPersonal + 1)) + minPersonal;
+        while (cantidadLlamada < pCant)
+        {
+            cantidadLlamada += (rand() % (maxPersonal - minPersonal + 1)) + minPersonal;
+        }
 
         return new Persona(pTipo, cantidadLlamada);
     } // hilo, parametro es el tipo de trabajador que quiere llamar, retorna una cuadrilla de trabajadores

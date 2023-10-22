@@ -207,7 +207,7 @@ public:
         return result;
     }
 
-    Node <T> *front()
+    Node<T> *front()
     {
         return first;
     }

@@ -13,11 +13,13 @@ Constructora::Constructora()
 
 void Constructora::llamarTrabajadores()
 {
-    vector<string> trabajadores = casa->getProcesoActual()->getPersonalFaltante();
-    for (const string &trabajador : trabajadores)
+    unordered_map<string, int> trabajadores = casa->getProcesoActual()->getPersonalFaltante();
+    for (const auto &pair : trabajadores)
     {
-        Persona *cuadrilla = jefe->llamarTrabajadores(trabajador);
+        Persona *cuadrilla = jefe->llamarTrabajadores(pair.first, pair.second);
         casa->checkIn(cuadrilla);
+        // cout << pair.second << endl;
+        // cout << cuadrilla->getCantidadPersona() << endl;
     }
 }
 
@@ -72,19 +74,18 @@ void Constructora::iniciarConstruccion()
         cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
         cout << "\n\033[1;36mIniciando proceso: " << procesoActual->getNombreProceso() << "\033[0m" << endl;
         imprimirMaterialNecesario(casa);
-        while (!procesoActual->verificarMaterial(casa->getMaterialesDisponibles()))
+        if (!procesoActual->verificarMaterial(casa->getMaterialesDisponibles()))
         {
             cout << "Comprando materiales necesarios" << endl;
             comprarMaterial();
             imprimirMateriales(casa);
         }
 
-        /*while (!procesoActual->verificarPersonal(casa->getTrabajadoresDisponibles()))
+        if (!procesoActual->verificarPersonal(casa->getTrabajadores()))
         {
             // cout << "Llamando personal necesario" << endl;
-            // cout << casa->getTrabajadoresDisponibles()->getSize() << endl;
             llamarTrabajadores();
-        }*/
+        }
 
         cout << "Finalizando proceso: " << procesoActual->getNombreProceso() << endl;
         casa->siguienteProceso();

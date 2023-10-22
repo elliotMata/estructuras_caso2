@@ -1,5 +1,5 @@
 #include "Casa.h"
-#include <map>
+#include <unordered_map>
 
 Casa::Casa(Config *config, vector<string> procesos)
 {
@@ -35,14 +35,18 @@ Proceso *Casa::getProcesoActual()
 void Casa::siguienteProceso()
 {
     List<Material> *materiales = procesos->front()->getData()->getMaterialNecesario();
+    List<Persona> *personal = procesos->front()->getData()->getPersonalNecesario();
     Material *materialActual;
     for (int pos = 0; pos < materiales->getSize(); pos++)
     {
         materialActual = materiales->find(pos);
         sacarMaterial(materialActual->getCantidadMaterial(), materialActual->getNombreMaterial());
     }
+    for (int pos = 0; pos < personal->getSize(); pos++)
+    {
+        checkOut(personal->find(pos));
+    }
     procesos->dequeue();
-    checkOut();
 }
 
 bool Casa::hayMasProcesos()
@@ -80,24 +84,40 @@ int Casa::getCantidadMaterial(string material)
 
 void Casa::checkIn(Persona *pTrabajadores)
 {
-    int count = pTrabajadores->getCantidadPersona();
-    string tipo = pTrabajadores->getTipoPersona();
-    while (count-- > 0)
+    if (!trabajadores->isEmpty())
     {
-        trabajadores->enqueue(new Persona(tipo, 1));
+        for (int i = 0; i < trabajadores->getSize(); i++)
+        {
+            Persona *trabajador = trabajadores->find(i);
+            if (trabajador->getTipoPersona() == pTrabajadores->getTipoPersona())
+            {
+                trabajador->setCantidadPersona(trabajador->getCantidadPersona() + pTrabajadores->getCantidadPersona());
+            }
+            else
+            {
+                trabajadores->add(pTrabajadores);
+            }
+        }
     }
-    // cout << trabajadores->getSize() << endl;
+    else
+    {
+        trabajadores->add(pTrabajadores);
+    }
 }
 
-void Casa::checkOut()
+void Casa::checkOut(Persona *pTrabajadores)
 {
-    while (!trabajadores->isEmpty())
+    for (int i = 0; i < trabajadores->getSize(); i++)
     {
-        trabajadores->dequeue();
+        Persona *trabajador = trabajadores->find(i);
+        if (trabajador->getTipoPersona() == pTrabajadores->getTipoPersona())
+        {
+            trabajador->setCantidadPersona(trabajador->getCantidadPersona() - pTrabajadores->getCantidadPersona());
+        }
     }
 }
 
-Queue<Persona> *Casa::getTrabajadores()
+List<Persona> *Casa::getTrabajadores()
 {
     return this->trabajadores;
 }
