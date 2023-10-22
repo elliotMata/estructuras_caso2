@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <thread>
 
 #include "Material.h"
 #include "Config.h"
@@ -33,6 +34,8 @@ public:
         {
             compra += (rand() % (maxCompra - minCompra + 1)) + minCompra;
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds(((rand() % (duracionMax - duracionMin + 1)) + duracionMin) * 1000));
+
         return Material(pTipo, compra);
     } // hilo, parametro es el tipo de material que quiere comprar, retorna un paquete del material comprado
 };
