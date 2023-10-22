@@ -118,10 +118,10 @@
     "Duraciones" : {
         "Procesos" : {
             "minimo" : 5,
-            "maximo" : 15
+            "maximo" : 8
         },
         "Revision" : {
-            "minimo" : 0.5,
+            "minimo" : 1,
             "maximo" : 2
         }
     }
