@@ -81,9 +81,10 @@ void imprimirPersonalNecesario(Casa *casa)
     cout << "*********************************\n" << endl;
 }
 
-void imprimirEstados (Casa *casa)
+void imprimirEstados (Casa *casa, Proceso *procesoActual)
 {
     cout << "\n\n\033[1;36m---------------------------------\033[0m\n" << endl;
+    cout << "Revisando finalizacion de proceso: " << procesoActual->getNombreProceso() << endl;
     imprimirPersonal(casa);
     imprimirMateriales(casa);
 }
@@ -127,10 +128,14 @@ void Constructora::iniciarConstruccion()
         Proceso *procesoActual = casa->getProcesoActual();
         cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
         cout << "\n\033[1;36mIniciando proceso: " << procesoActual->getNombreProceso() << "\033[0m" << endl;
+
+        // estado previo a la ejecucion del proceso
         imprimirProcesos(casa);
         imprimirPersonalNecesario(casa);
         imprimirMaterialNecesario(casa);
         cout << "\033[1;36m---------------------------------\033[0m\n" << endl;
+
+        // ejecucion de los procesos
         cout << "Realizando proceso: " << procesoActual->getNombreProceso() << "\n\n" << endl;
 
         if (!procesoActual->verificarMaterial(casa->getMaterialesDisponibles()))
@@ -147,8 +152,9 @@ void Constructora::iniciarConstruccion()
             thread1.join();
         if (thread2.joinable())
             thread2.join();
-        imprimirEstados(casa);
-        cout << "Revisando finalizacion de proceso: " << procesoActual->getNombreProceso() << endl;
+        
+        // revision del proceso
+        imprimirEstados(casa, procesoActual);
         this_thread::sleep_for(milliseconds(((rand() % (procesoActual->getMaxDuracionRevision() - procesoActual->getMinDuracionRevision() + 1)) + procesoActual->getMinDuracionRevision()) * config->getDuracionHoraSimulador()));
         casa->siguienteProceso();
         auto finProceso = high_resolution_clock::now();

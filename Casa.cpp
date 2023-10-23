@@ -1,5 +1,29 @@
-#include "Casa.h"
 #include <unordered_map>
+#include <iomanip>
+
+#include "Casa.h"
+
+void imprimirHeaderCheckOut()
+{
+    cout << "Check out de los trabajadores\n" << endl;
+    cout << "\n*********************************" << endl;
+    cout << "*     CHECK OUT PERSONAL        *" << endl;
+    cout << "*-------------------------------*" << endl;
+}
+
+void imprimirHeaderSacarMaterial()
+{
+    cout << "Sacar material de las pilas\n" << endl;
+    cout << "\n*********************************" << endl;
+    cout << "*      SACAR MATERIALES         *" << endl;
+    cout << "*-------------------------------*" << endl;
+}
+
+void imprimirDatos(string nombre, int cantidad)
+{
+    cout << "* " << std::setw(19) << std::setfill(' ') << nombre << " > " << std::setw(5) << std::setfill(' ') << cantidad << "   *" << endl;
+}
+
 
 Casa::Casa(Config *config, vector<string> procesos)
 {
@@ -66,10 +90,13 @@ bool Casa::hayMasProcesos()
 void Casa::sacarMaterial(int cantidad, string material)
 {
     Stack<Material> *pila = pilasMateriales.at(material);
+    imprimirHeaderSacarMaterial();
     while (cantidad-- > 0)
     {
-        pila->pop();
+        Material *material = pila->pop();
+        imprimirDatos(material->getNombreMaterial(), material->getCantidadMaterial());
     }
+    cout << "*********************************\n\n";
 }
 
 void Casa::guardarMaterial(int cantidad, string material)
@@ -110,14 +137,18 @@ void Casa::checkIn(Persona *pTrabajadores)
 
 void Casa::checkOut(Persona *pTrabajadores)
 {
+    imprimirHeaderCheckOut();
     for (int i = 0; i < trabajadores->getSize(); i++)
     {
         Persona *trabajador = trabajadores->find(i);
         if (trabajador->getTipoPersona() == pTrabajadores->getTipoPersona())
         {
-            trabajador->setCantidadPersona(trabajador->getCantidadPersona() - pTrabajadores->getCantidadPersona());
+            int cantidadSalida = pTrabajadores->getCantidadPersona();
+            imprimirDatos(pTrabajadores->getTipoPersona(), cantidadSalida);
+            trabajador->setCantidadPersona(trabajador->getCantidadPersona() - cantidadSalida);
         }
     }
+    cout << "*********************************\n\n";
 }
 
 List<Persona> *Casa::getTrabajadores()
