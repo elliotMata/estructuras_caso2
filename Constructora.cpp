@@ -1,8 +1,11 @@
 #include <iostream>
 #include <iomanip>
 #include <thread>
+#include <chrono>
 
 #include "Constructora.h"
+
+using namespace std::chrono;
 
 void imprimirProcesos (Casa *casa)
 {
@@ -15,12 +18,12 @@ void imprimirProcesos (Casa *casa)
     {
         cout << "* " << std::setw(22) << std::setfill(' ') << casa->getProcesos()->next()->getNombreProceso() <<  "        *" << endl;
     }
-    cout << "*********************************" << endl;
+    cout << "*********************************\n" << endl;
 }
 
 void imprimirMateriales(Casa *casa)
 {
-    cout << "*********************************" << endl;
+    cout << "\n*********************************" << endl;
     cout << "*      CANTIDAD MATERIALES      *" << endl;
     cout << "*-------------------------------*" << endl;
     cout << "* " << std::setw(19) << std::setfill(' ') << "Pila cemento" << " > " << std::setw(5) << std::setfill(' ') << casa->getCantidadMaterial("Cemento") << "   *" << endl;
@@ -47,7 +50,11 @@ void imprimirPersonal(Casa *casa)
 void imprimirMaterialNecesario(Casa *casa)
 {
     List<Material> *materialNecesario = casa->getProcesoActual()->getMaterialNecesario();
-    cout << "*********************************" << endl;
+    if (materialNecesario->getSize() == 0)
+    {
+        return;
+    }
+    cout << "\n*********************************" << endl;
     cout << "*    MATERIALES NECESARIOS      *" << endl;
     cout << "*-------------------------------*" << endl;
     for (int i = 0; i < materialNecesario->getSize(); i++)
@@ -62,7 +69,7 @@ void imprimirMaterialNecesario(Casa *casa)
 void imprimirPersonalNecesario(Casa *casa)
 {
     List<Persona> *personalNecesario = casa->getProcesoActual()->getPersonalNecesario();
-    cout << "*********************************" << endl;
+    cout << "\n*********************************" << endl;
     cout << "*     PERSONAL NECESARIO        *" << endl;
     cout << "*-------------------------------*" << endl;
     for (int i = 0; i < personalNecesario->getSize(); i++)
@@ -71,8 +78,14 @@ void imprimirPersonalNecesario(Casa *casa)
         string nombre = persona->getTipoPersona();
         cout << "* " << std::setw(19) << std::setfill(' ') << nombre << " > " << std::setw(5) << std::setfill(' ') << persona->getCantidadPersona() << "   *" << endl;
     }
-    cout << "*********************************\n\n" << endl;
-    cout << "---------------------------------\n\n" << endl;
+    cout << "*********************************\n" << endl;
+}
+
+void imprimirEstados (Casa *casa)
+{
+    cout << "\n\n\033[1;36m---------------------------------\033[0m\n" << endl;
+    imprimirPersonal(casa);
+    imprimirMateriales(casa);
 }
 
 Constructora::Constructora()
@@ -91,7 +104,6 @@ void Constructora::llamarTrabajadores()
         Persona *cuadrilla = jefe->llamarTrabajadores(pair.first, pair.second);
         casa->checkIn(cuadrilla);
     }
-    imprimirPersonal(casa);
 }
 
 void Constructora::comprarMaterial()
@@ -102,7 +114,6 @@ void Constructora::comprarMaterial()
         Material paquete = comprador->comprar(pair.first, pair.second);
         casa->guardarMaterial(paquete.getCantidadMaterial(), paquete.getNombreMaterial());
     }
-    imprimirMateriales(casa);
 }
 
 void Constructora::iniciarConstruccion()
@@ -112,32 +123,38 @@ void Constructora::iniciarConstruccion()
     thread thread2;
     while (casa->hayMasProcesos())
     {
+        auto inicioProceso = high_resolution_clock::now();
         Proceso *procesoActual = casa->getProcesoActual();
         cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
         cout << "\n\033[1;36mIniciando proceso: " << procesoActual->getNombreProceso() << "\033[0m" << endl;
         imprimirProcesos(casa);
-        imprimirPersonal(casa);
+        imprimirPersonalNecesario(casa);
         imprimirMaterialNecesario(casa);
+        cout << "\033[1;36m---------------------------------\033[0m\n" << endl;
+        cout << "Realizando proceso: " << procesoActual->getNombreProceso() << "\n\n" << endl;
+
         if (!procesoActual->verificarMaterial(casa->getMaterialesDisponibles()))
         {
-            cout << "Comprando materiales necesarios" << endl;
             thread1 = thread(&Constructora::comprarMaterial, this);
         }
-
         if (!procesoActual->verificarPersonal(casa->getTrabajadores()))
         {
-            cout << "Llamando personal necesario" << endl;
             thread2 = thread(&Constructora::llamarTrabajadores, this);
         }
-        cout << "Realizando proceso: " << procesoActual->getNombreProceso() << endl;
-        this_thread::sleep_for(chrono::milliseconds(((rand() % (procesoActual->getMaxDuracion() - procesoActual->getMinDuracion() + 1)) + procesoActual->getMinDuracion()) * config->getDuracionHoraSimulador()));
+        
+        this_thread::sleep_for(milliseconds(((rand() % (procesoActual->getMaxDuracion() - procesoActual->getMinDuracion() + 1)) + procesoActual->getMinDuracion()) * config->getDuracionHoraSimulador()));
         if (thread1.joinable())
             thread1.join();
         if (thread2.joinable())
             thread2.join();
+        imprimirEstados(casa);
         cout << "Revisando finalizacion de proceso: " << procesoActual->getNombreProceso() << endl;
-        this_thread::sleep_for(chrono::milliseconds(((rand() % (procesoActual->getMaxDuracionRevision() - procesoActual->getMinDuracionRevision() + 1)) + procesoActual->getMinDuracionRevision()) * config->getDuracionHoraSimulador()));
+        this_thread::sleep_for(milliseconds(((rand() % (procesoActual->getMaxDuracionRevision() - procesoActual->getMinDuracionRevision() + 1)) + procesoActual->getMinDuracionRevision()) * config->getDuracionHoraSimulador()));
         casa->siguienteProceso();
+        auto finProceso = high_resolution_clock::now();
+        auto duracionProceso = duration_cast<microseconds>(finProceso - inicioProceso);
+
+        cout << "Tiempo transcurrido en proceso: " << duracionProceso.count()/config->getDuracionHoraSimulador() << "\n" << endl;
     }
     cout << "\n\033[1;36m---------------------------------------------\033[0m" << endl;
     cout << "\n\033[1;36mCONSTRUCCION FINALIZADA!\033[0m\n"
